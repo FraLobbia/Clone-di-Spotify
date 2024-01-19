@@ -426,7 +426,7 @@ const Home = () => {
 							</div>
 						</div>
 						<div
-							className="row row-cols-2 row-cols-lg-3 mt-4"
+							className="row row-cols-2 row-cols-lg-3 row-cols-xl-4 row-cols-xl-5 mt-4"
 							id="discoverOtherArtist">
 							{/* 	<!-- qui appendiamo gli album --> */}
 							{home.map((track, index) => {
@@ -437,7 +437,7 @@ const Home = () => {
 												<img
 													src={track.album.cover_big}
 													className="card-img-top  self"
-													style={{ width: "200px" }}
+													style={{ width: "160px" }}
 													alt="copertina album/playlist"
 												/>
 												<div className="text-truncate">
