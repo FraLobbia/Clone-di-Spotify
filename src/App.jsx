@@ -17,6 +17,7 @@ function App() {
 		(store) => store.trackPlaying.trackPlaying
 	);
 	const audio = document.getElementById("myAudio");
+
 	const handleSection = async (artistName) => {
 		try {
 			let response = await fetch(
@@ -59,7 +60,7 @@ function App() {
 			{trackPlaying && (
 				<>
 					<div>
-						<div className="fixed-bottom container-fluid">
+						<div className="fixed-bottom container-fluid p-0">
 							<Player />
 							<PlayerMini />
 							<MyNavMini />

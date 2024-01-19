@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsPlaying } from "../redux/actions";
-import { Button } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 const Player = () => {
 	const audio = document.getElementById("myAudio");
@@ -36,108 +36,110 @@ const Player = () => {
 	}, [isPlaying]);
 
 	return (
-		<div
-			className="container-fluid d-none d-md-block bg-black text-secondary pe-4"
-			id="player">
-			<div className="row py-3 fs-5 align-items-center">
-				<div
-					id="dataPlayer"
-					className="col-4 d-flex align-items-center justify-content-start text-start">
-					{/* <!-- qui va a riempire la funzione riempiDataPlayer() con i dati della track da riprodurre --> */}
+		<Container fluid className="d-none d-md-block bg-black" id="player">
+			<Row className="py-3 fs-5 align-items-center">
+				<Col className="d-flex align-items-center justify-content-start text-start ms-3">
 					<img
 						src={trackPlaying.album.cover_medium}
-						alt=""
-						style={{ height: "40px" }}
+						alt="cover dell'album"
+						style={{ maxWidth: "70px" }}
 					/>
-					<div class="fs-6 px-3 flex-column d-flex">
+					<div class="d-flex flex-column">
 						<Button variant="link" className="py-0 text-white">
-							{trackPlaying.title_short}
+							{trackPlaying.title}
 						</Button>
 						<Button variant="link" className="py-0">
 							{trackPlaying.artist.name}
 						</Button>
 					</div>
-					<button type="button" class="btn text-secondary p-0">
+					<Button variant="link">
 						<i class="bi bi-heart"></i>
-					</button>
-				</div>
+					</Button>
+				</Col>
 
 				{/* <!-- navbar player - gruppo CENTER --> */}
-				<div className="col-4 text-center px-0 d-flex flex-column justify-content-center align-items-center">
-					<div className="col-4 text-center px-0 d-flex justify-content-center align-items-center">
-						<button
-							type="button"
-							className="btn text-secondary p-0">
-							<i className="bi bi-shuffle fs-4 me-2"></i>
-						</button>
-						<button
-							type="button"
-							className="btn text-secondary p-0">
-							<i className="bi bi-skip-start-fill fs-4 me-2"></i>
-						</button>
+				<Col className="text-center">
+					<Row>
+						<Col>
+							<Button variant="link" className="p-0">
+								<i className="bi bi-shuffle"></i>
+							</Button>
+							<Button variant="link" className="p-0">
+								<i className="bi bi-skip-start-fill"></i>
+							</Button>
+							<Button
+								id="playButton"
+								variant="link"
+								// onClick={() => dispatch(setIsPlaying(!isPlaying))}
+								onClick={() => togglePlayPause()}
+								className=" p-0 playButtonclass">
+								<i className="bi bi-play-circle-fill fs-1 text-white"></i>
+							</Button>
+							<Button variant="link" className="p-0">
+								<i className="bi bi-skip-end-fill "></i>
+							</Button>
+							<Button variant="link" className="p-0">
+								<i className="bi bi-repeat"></i>
+							</Button>
+						</Col>
+					</Row>
+					<Container fluid>
+						<Row className="flex-nowrap g-0">
+							<Col xs={2}>
+								<span
+									id="timeProgress"
+									className="text-secondary fs-8">
+									00:02
+								</span>
+							</Col>
 
-						<button
-							id="playButton"
-							type="button"
-							// onClick={() => dispatch(setIsPlaying(!isPlaying))}
-							onClick={() => togglePlayPause()}
-							className="btn text-secondary p-0 playButtonclassName">
-							<i className="bi bi-play-circle-fill fs-1 me-2 text-white"></i>
-						</button>
-
-						<button
-							type="button"
-							className="btn text-secondary p-0">
-							<i className="bi bi-skip-end-fill fs-4 me-2"></i>
-						</button>
-						<button
-							type="button"
-							className="btn text-secondary p-0">
-							<i className="bi bi-repeat fs-4"></i>
-						</button>
-					</div>
-					<div className="w-100">
-						<span id="timeProgress" className="fs-8">
-							00:02
-						</span>
-						<input
-							id="progressBar"
-							type="range"
-							className="w-50"
-							min="0"
-							max="100"
-							value="0"
-						/>
-						<span id="trackDuration" className="fs-8"></span>
-					</div>
-				</div>
+							<Col>
+								<input
+									id="progressBar"
+									type="range"
+									className="w-100"
+									min="0"
+									max="100"
+									value="0"
+								/>
+							</Col>
+							<Col xs={2}>
+								<span
+									id="trackDuration"
+									className="text-secondary fs-8">
+									00:30
+								</span>
+							</Col>
+						</Row>
+					</Container>
+				</Col>
 
 				{/* 	<!-- navbar player - gruppo DX --> */}
-				<div className="col-4 text-end px-0 volume-slider-container">
-					<button type="button" className="btn text-secondary p-0">
+				<Col className="text-end px-0 volume-slider-container">
+					<Button variant="link" className=" p-0">
 						<i className="bi bi-text-right"></i>
-					</button>
-					<button type="button" className="btn text-secondary p-0">
-						<i className="bi bi-list me-2"></i>
-					</button>
-					<button type="button" className="btn text-secondary p-0">
-						<i className="bi bi-speaker me-2"></i>
-					</button>
-					<button type="button" className="btn text-secondary p-0">
+					</Button>
+					<Button variant="link" className=" p-1">
+						<i className="bi bi-list"></i>
+					</Button>
+					<Button variant="link" className=" p-1">
+						<i className="bi bi-speaker"></i>
+					</Button>
+					<Button variant="link" className=" p-1">
 						<i className="bi bi-volume-up"></i>
-					</button>
+					</Button>
 					<input
 						type="range"
-						className="volume-slider"
+						className="volume-slider w-25"
 						min="0"
 						max="100"
 					/>
-					<button type="button" className="btn text-secondary p-0">
+					<Button variant="link" className="ps-2">
 						<i className="bi bi-arrows-angle-expand"></i>
-					</button>
-				</div>
-			</div>
-		</div>
+					</Button>
+				</Col>
+			</Row>
+		</Container>
 	);
 };
 
