@@ -2,7 +2,7 @@
 const trackPlayingReducer = (state = { trackPlaying: null }, action) => {
 	switch (action.type) {
 		case "STORE_TRACK_PLAYING":
-			return { trackPlaying: action.payload };
+			return { ...state, trackPlaying: action.payload };
 		default:
 			return state;
 	}

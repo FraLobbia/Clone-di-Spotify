@@ -12,6 +12,7 @@ import store from "./redux/store";
 function App() {
 	const dispatch = useDispatch();
 	const home = useSelector((store) => store.home);
+	const store = useSelector((store) => store);
 	const trackPlaying = useSelector(
 		(store) => store.trackPlaying.trackPlaying
 	);
@@ -33,7 +34,6 @@ function App() {
 				let { data } = await response.json();
 				dispatch(storeHome(data));
 				dispatch(storeTrackPlaying(data[5]));
-				console.log(data[5]);
 			} else {
 				throw new Error("Error in fetching songs");
 			}
@@ -44,7 +44,7 @@ function App() {
 
 	useEffect(() => {
 		handleSection("eminem");
-		console.log(trackPlaying);
+		console.log(store);
 	}, []);
 
 	return (

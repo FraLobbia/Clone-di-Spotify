@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsPlaying } from "../redux/actions";
 
 const Player = () => {
 	const audio = document.getElementById("myAudio");
+	const dispatch = useDispatch();
+	const isPlaying = useSelector((store) => store.player.isPlaying);
 	const togglePlayPause = () => {
 		if (audio.paused) {
 			audio.play();
@@ -13,10 +17,19 @@ const Player = () => {
 	};
 
 	const [flag, setFlag] = useState(false);
+
 	useEffect(() => {
 		setFlag(!flag);
 	}, []);
-	useEffect(() => {}, [flag]);
+
+	useEffect(() => {
+		console.log(isPlaying);
+		console.log("ciao");
+	}, [flag]);
+
+	useEffect(() => {
+		console.log(isPlaying);
+	}, [isPlaying]);
 
 	return (
 		<div
@@ -46,6 +59,7 @@ const Player = () => {
 						<button
 							id="playButton"
 							type="button"
+							// onClick={() => dispatch(setIsPlaying(!isPlaying))}
 							onClick={() => togglePlayPause()}
 							className="btn text-secondary p-0 playButtonclassName">
 							<i className="bi bi-play-circle-fill fs-1 me-2 text-white"></i>
