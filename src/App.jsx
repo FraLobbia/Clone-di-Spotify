@@ -12,7 +12,10 @@ import store from "./redux/store";
 function App() {
 	const dispatch = useDispatch();
 	const home = useSelector((store) => store.home);
-	const trackPlaying = useSelector((store) => store.trackPlaying);
+	const trackPlaying = useSelector(
+		(store) => store.trackPlaying.trackPlaying
+	);
+	const audio = document.getElementById("myAudio");
 	const handleSection = async (artistName) => {
 		try {
 			let response = await fetch(
@@ -41,7 +44,7 @@ function App() {
 
 	useEffect(() => {
 		handleSection("eminem");
-		console.log(trackPlaying.preview);
+		console.log(trackPlaying);
 	}, []);
 
 	return (
@@ -53,18 +56,24 @@ function App() {
 					<Home />
 				</div>
 			</div>
-			<div className="fixed-bottom container-fluid">
-				<Player />
-				<PlayerMini />
-				<MyNavMini />
-			</div>
-			<audio id="myAudio">
-				<source
-					id="audioSource"
-					src={trackPlaying.preview}
-					type="audio/mp3"
-				/>
-			</audio>
+			{trackPlaying && (
+				<>
+					<div>
+						<div className="fixed-bottom container-fluid">
+							<Player />
+							<PlayerMini />
+							<MyNavMini />
+						</div>
+					</div>
+					<audio id="myAudio">
+						<source
+							id="audioSource"
+							src={trackPlaying.preview}
+							type="audio/mp3"
+						/>
+					</audio>
+				</>
+			)}
 		</div>
 	);
 }

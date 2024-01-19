@@ -1,4 +1,23 @@
+import { useEffect, useState } from "react";
+
 const Player = () => {
+	const audio = document.getElementById("myAudio");
+	const togglePlayPause = () => {
+		if (audio.paused) {
+			audio.play();
+			// switchIconaPlayPause("pause");
+		} else {
+			audio.pause();
+			// switchIconaPlayPause("play");
+		}
+	};
+
+	const [flag, setFlag] = useState(false);
+	useEffect(() => {
+		setFlag(!flag);
+	}, []);
+	useEffect(() => {}, [flag]);
+
 	return (
 		<div
 			className="container-fluid d-none d-md-block bg-black text-secondary pe-4"
@@ -23,12 +42,15 @@ const Player = () => {
 							className="btn text-secondary p-0">
 							<i className="bi bi-skip-start-fill fs-4 me-2"></i>
 						</button>
+
 						<button
 							id="playButton"
 							type="button"
+							onClick={() => togglePlayPause()}
 							className="btn text-secondary p-0 playButtonclassName">
 							<i className="bi bi-play-circle-fill fs-1 me-2 text-white"></i>
 						</button>
+
 						<button
 							type="button"
 							className="btn text-secondary p-0">

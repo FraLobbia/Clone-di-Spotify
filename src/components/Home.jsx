@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-	const home = useSelector((store) => store.home);
+	const home = useSelector((store) => store.home.home);
 	useEffect(() => {
 		console.log(home);
 	}, []);
 	return (
 		<>
-			{home.home ? (
+			{home ? (
 				<main
 					className="ml-sm-auto px-4 pt-5 bg-dark container-fluid position-relative"
 					style={{ backgroundColor: "#0a0a0a" }}>
@@ -30,8 +30,7 @@ const Home = () => {
 													id="imgHeroSection"
 													className="my-3 ms-2 me-4 img-fluid"
 													src={
-														home.home[2].album
-															.cover_big
+														home[2].album.cover_big
 													}
 													alt="foto album"
 												/>
@@ -44,10 +43,7 @@ const Home = () => {
 												</p>
 												<h2 className="display-4 fw-bold mb-0">
 													<span>
-														{
-															home.home[2].artist
-																.name
-														}
+														{home[2].artist.name}
 													</span>
 												</h2>
 												<p className="mb-2">
@@ -57,10 +53,7 @@ const Home = () => {
 													Ascolta il nuovo brano di
 													<span>
 														{" "}
-														{
-															home.home[2].artist
-																.name
-														}
+														{home[2].artist.name}
 													</span>
 													!
 												</p>
@@ -135,7 +128,7 @@ const Home = () => {
 									<div className="d-flex align-items-center bg-g2d mb-2 me-0 rounded-2">
 										<div>
 											<img
-												src={home.home[3].album.cover}
+												src={home[3].album.cover}
 												alt="Immagine playlist"
 												width="80px"
 												className="img-fluid rounded-start"
@@ -150,7 +143,7 @@ const Home = () => {
 									<div className="d-flex align-items-center bg-g2d mb-2 me-0">
 										<div>
 											<img
-												src={home.home[4].album.cover}
+												src={home[4].album.cover}
 												alt="Immagine playlist"
 												width="80px"
 												className="img-fluid rounded-start"
@@ -167,7 +160,7 @@ const Home = () => {
 									<div className="d-flex align-items-center bg-g2d mb-2 me-0 rounded-2">
 										<div>
 											<img
-												src={home.home[5].album.cover}
+												src={home[5].album.cover}
 												alt="Immagine playlist"
 												width="80px"
 												className="img-fluid rounded-start"
@@ -182,7 +175,7 @@ const Home = () => {
 									<div className="d-flex align-items-center bg-g2d mb-2 me-0">
 										<div>
 											<img
-												src={home.home[6].album.cover}
+												src={home[6].album.cover}
 												alt="Immagine playlist"
 												width="80px"
 												className="img-fluid rounded-start"
@@ -199,7 +192,7 @@ const Home = () => {
 									<div className="d-flex align-items-center bg-g2d mb-2 me-0 rounded-2">
 										<div>
 											<img
-												src={home.home[7].album.cover}
+												src={home[7].album.cover}
 												alt="Immagine playlist"
 												width="80px"
 												className="img-fluid rounded-start"
@@ -214,7 +207,7 @@ const Home = () => {
 									<div className="d-flex align-items-center bg-g2d mb-2 me-0">
 										<div>
 											<img
-												src={home.home[8].album.cover}
+												src={home[8].album.cover}
 												alt="Immagine playlist"
 												width="80px"
 												className="img-fluid rounded-start"
@@ -237,7 +230,7 @@ const Home = () => {
 								<div className="d-flex justify-content-center align-items-md-center bg-dark mb-2 me-2 rounded-2">
 									<div>
 										<img
-											src={home.home[3].album.cover_small}
+											src={home[3].album.cover_small}
 											alt="Immagine playlist"
 											width="80px"
 											className="img-fluid rounded-start"
@@ -252,7 +245,7 @@ const Home = () => {
 								<div className="d-flex justify-content-center align-items-md-center bg-dark mb-2 me-2 rounded-2">
 									<div>
 										<img
-											src={home.home[4].album.cover_small}
+											src={home[4].album.cover_small}
 											alt="Immagine playlist"
 											width="80px"
 											className="img-fluid rounded-start"
@@ -267,7 +260,7 @@ const Home = () => {
 								<div className="d-flex justify-content-center align-items-md-center bg-dark mb-2 me-2 d-lg-none rounded-2">
 									<div>
 										<img
-											src={home.home[5].album.cover_small}
+											src={home[5].album.cover_small}
 											alt="Immagine playlist"
 											width="80px"
 											className="img-fluid rounded-start"
@@ -285,7 +278,7 @@ const Home = () => {
 								<div className="d-flex justify-content-center align-items-md-center bg-dark mb-2 me-2 rounded-2">
 									<div>
 										<img
-											src={home.home[6].album.cover_small}
+											src={home[6].album.cover_small}
 											alt="Immagine playlist"
 											width="80px"
 											className="img-fluid rounded-start"
@@ -300,7 +293,7 @@ const Home = () => {
 								<div className="d-flex justify-content-center align-items-md-center bg-dark mb-2 me-2 rounded-2">
 									<div>
 										<img
-											src={home.home[7].album.cover_small}
+											src={home[7].album.cover_small}
 											alt="Immagine playlist"
 											width="80px"
 											className="img-fluid rounded-start"
@@ -315,7 +308,7 @@ const Home = () => {
 								<div className="d-flex justify-content-center align-items-md-center bg-dark mb-2 me-2 d-lg-none rounded-2">
 									<div>
 										<img
-											src={home.home[8].album.cover_small}
+											src={home[8].album.cover_small}
 											alt="Immagine playlist"
 											width="80px"
 											className="img-fluid rounded-start"
@@ -436,7 +429,7 @@ const Home = () => {
 							className="row row-cols-2 row-cols-lg-5 mt-4"
 							id="discoverOtherArtist">
 							{/* 	<!-- qui appendiamo gli album --> */}
-							{home.home.map((track, index) => {
+							{home.map((track, index) => {
 								return (
 									<>
 										{index < 6 && (
