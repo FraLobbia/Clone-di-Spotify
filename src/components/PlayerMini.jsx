@@ -1,18 +1,27 @@
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const PlayerMini = () => {
+	const trackPlaying = useSelector(
+		(store) => store.trackPlaying.trackPlaying
+	);
 	return (
 		<div id="playerMini" className="d-md-none py-3 mx-1 fs-8 rounded-3 row">
 			<div id="playerMiniData" className="col-7 d-flex">
-				<div className="fs-6 pe-3">
-					<Button variant="link" href="#">
-						<p className="my-0 fw-bold text-white">
-							Fat Funny Friend
-						</p>
-					</Button>
-					<Button variant="link" href="#">
-						<p className="my-0">Maddie Zahm</p>
-					</Button>
+				<div className="fs-6 pe-3 d-flex">
+					<img
+						src={trackPlaying.album.cover_medium}
+						alt=""
+						style={{ height: "40px" }}
+					/>
+					<div class="fs-6 px-3 flex-column d-flex">
+						<Button variant="link" className="py-0 text-white">
+							{trackPlaying.title_short}
+						</Button>
+						<Button variant="link" className="py-0">
+							{trackPlaying.artist.name}
+						</Button>
+					</div>
 				</div>
 			</div>
 

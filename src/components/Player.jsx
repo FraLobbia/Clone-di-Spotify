@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsPlaying } from "../redux/actions";
+import { Button } from "react-bootstrap";
 
 const Player = () => {
 	const audio = document.getElementById("myAudio");
 	const dispatch = useDispatch();
 	const isPlaying = useSelector((store) => store.player.isPlaying);
+	const trackPlaying = useSelector(
+		(store) => store.trackPlaying.trackPlaying
+	);
 	const togglePlayPause = () => {
 		if (audio.paused) {
 			audio.play();
@@ -23,7 +27,7 @@ const Player = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(isPlaying);
+		console.log(trackPlaying);
 		console.log("ciao");
 	}, [flag]);
 
@@ -40,6 +44,22 @@ const Player = () => {
 					id="dataPlayer"
 					className="col-4 d-flex align-items-center justify-content-start text-start">
 					{/* <!-- qui va a riempire la funzione riempiDataPlayer() con i dati della track da riprodurre --> */}
+					<img
+						src={trackPlaying.album.cover_medium}
+						alt=""
+						style={{ height: "40px" }}
+					/>
+					<div class="fs-6 px-3 flex-column d-flex">
+						<Button variant="link" className="py-0 text-white">
+							{trackPlaying.title_short}
+						</Button>
+						<Button variant="link" className="py-0">
+							{trackPlaying.artist.name}
+						</Button>
+					</div>
+					<button type="button" class="btn text-secondary p-0">
+						<i class="bi bi-heart"></i>
+					</button>
 				</div>
 
 				{/* <!-- navbar player - gruppo CENTER --> */}
