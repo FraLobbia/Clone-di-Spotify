@@ -426,30 +426,30 @@ const Home = () => {
 							</div>
 						</div>
 						<div
-							className="row row-cols-2 row-cols-lg-5 mt-4"
+							className="row row-cols-2 row-cols-lg-3 mt-4"
 							id="discoverOtherArtist">
 							{/* 	<!-- qui appendiamo gli album --> */}
 							{home.map((track, index) => {
 								return (
 									<>
 										{index < 6 && (
-											<>
+											<div className=" ">
 												<img
-													src={
-														track.album.cover_small
-													}
-													class="card-img-top"
-													style={{ width: "100px" }}
+													src={track.album.cover_big}
+													className="card-img-top  self"
+													style={{ width: "200px" }}
 													alt="copertina album/playlist"
 												/>
-												<h6 class="text-truncate card-title text-white fw-bold mt-3 mb-2">
-													{track.album.title}
-												</h6>
-												<p class="card-text text-secondary">
-													Classifica{" "}
-													{track.album.rank}
-												</p>
-											</>
+												<div className="text-truncate">
+													<h6 className="text-truncate card-title text-white fw-bold mt-3 mb-2">
+														{track.album.title}
+													</h6>
+													<p className="card-text text-secondary">
+														Classifica{" "}
+														{track.album.rank}
+													</p>
+												</div>
+											</div>
 										)}
 									</>
 								);
