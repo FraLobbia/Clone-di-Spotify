@@ -1,10 +1,11 @@
 // src/reducers/index.js
 import { combineReducers } from "redux";
-import weatherReducer from "./weatherReducer";
+
+import homeReducer from "./homeReducer";
 import forecastReducer from "./forecastReducer";
 
 const rootReducer = combineReducers({
-	weather: weatherReducer,
+	home: homeReducer,
 	forecast: forecastReducer,
 });
 

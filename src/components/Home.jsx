@@ -1,13 +1,14 @@
+import { useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+	const home = useSelector((store) => store.home);
+	useEffect(() => {
+		console.log(home);
+	}, []);
 	return (
 		<>
-			{/* <!-- inizio sidebar --> */}
-
-			{/* 	<!-- fine sidebar --> */}
-
-			{/* 	<!-- inizio parte centrale --> */}
 			<main
 				className="ml-sm-auto px-4 pt-5 bg-dark container-fluid position-relative"
 				style={{ backgroundColor: "#0a0a0a" }}>
@@ -26,7 +27,9 @@ const Home = () => {
 											<img
 												id="imgHeroSection"
 												className="my-3 ms-2 me-4 img-fluid"
-												src=""
+												src={
+													home.home[2].album.cover_big
+												}
 												alt="foto album"
 											/>
 										</div>
@@ -35,14 +38,19 @@ const Home = () => {
 										<div className="text-white position-relative">
 											<p className="mb-1 mt-2">Singolo</p>
 											<h2 className="display-4 fw-bold mb-0">
-												<span id="spanTrackHeroSection"></span>
+												<span>
+													{home.home[2].artist.name}
+												</span>
 											</h2>
 											<p className="mb-2">
 												<span className=""></span>
 											</p>
 											<p className="mb-4">
 												Ascolta il nuovo brano di
-												<span className="artistHeroSection"></span>
+												<span>
+													{" "}
+													{home.home[2].artist.name}
+												</span>
 												!
 											</p>
 											<div className="d-inline-block">
@@ -418,24 +426,6 @@ const Home = () => {
 					</div>
 				</div>
 			</main>
-
-			{/* <!-- fine parte centrale -->
-
-<!-- offcanvas --> */}
-
-			{/* <!-- fine offcanvas -->
-<!-- sezioni in fondo alla pagina --> */}
-
-			{/* <!-- navbar player - gruppo SX --> */}
-
-			{/* <!-- navbar player schermi piccoli ---> */}
-
-			{/* <!-- navbar bottom per schermi piccoli --> */}
-
-			{/* <!-- audio --> */}
-			<audio id="myAudio">
-				{/* <!-- <source id="audioSource" src="https://cdns-preview-8.dzcdn.net/stream/c-89dffbddf9f3f2a501d4760ea8215419-3.mp3" type="audio/mp3" /> --> */}
-			</audio>
 		</>
 	);
 };

@@ -1,8 +1,8 @@
 //actions/index.js
 
-export const storeWeather = (weather) => ({
-	type: "STORE_WEATHER",
-	payload: weather,
+export const storeHome = (home) => ({
+	type: "STORE_HOME",
+	payload: home,
 });
 export const storeForecast = (forecast) => ({
 	type: "STORE_FORECAST",

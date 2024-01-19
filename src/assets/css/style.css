@@ -12100,10 +12100,6 @@ nav {
   background-color: #282828;
 }
 
-body {
-  font-family: "CircularStd", Arial, sans-serif;
-}
-
 #friendsActivity > a {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -12125,10 +12121,6 @@ body {
 
 .bg-g2d {
   background-color: #2d2d2d;
-}
-
-.fs10 {
-  font-size: 8px;
 }
 
 .track-row {
@@ -12158,11 +12150,6 @@ body {
 
 .card {
   aspect-ratio: 1/1;
-}
-
-#main-content,
-#tracksContainer {
-  padding-bottom: 135px;
 }
 
 input[type=range] {
