@@ -7,11 +7,12 @@ import PlayerMini from "./components/PlayerMini";
 import MyNav from "./components/myNav";
 import { token } from "./token";
 import { useDispatch, useSelector } from "react-redux";
-import { storeHome } from "./redux/actions";
+import { storeHome, storeTrackPlaying } from "./redux/actions";
 import store from "./redux/store";
 function App() {
 	const dispatch = useDispatch();
 	const home = useSelector((store) => store.home);
+	const trackPlaying = useSelector((store) => store.trackPlaying);
 	const handleSection = async (artistName) => {
 		try {
 			let response = await fetch(
@@ -28,6 +29,8 @@ function App() {
 			if (response.ok) {
 				let { data } = await response.json();
 				dispatch(storeHome(data));
+				dispatch(storeTrackPlaying(data[5]));
+				console.log(data[5]);
 			} else {
 				throw new Error("Error in fetching songs");
 			}
@@ -37,8 +40,8 @@ function App() {
 	};
 
 	useEffect(() => {
-		handleSection("queen");
-		console.log(home);
+		handleSection("eminem");
+		console.log(trackPlaying.preview);
 	}, []);
 
 	return (
@@ -46,11 +49,9 @@ function App() {
 			<div className="d-flex vh-100">
 				<MyNav />
 
-				{home && (
-					<div className="container-fluid  d-flex p-0">
-						<Home />
-					</div>
-				)}
+				<div className="container-fluid  d-flex p-0">
+					<Home />
+				</div>
 			</div>
 			<div className="fixed-bottom container-fluid">
 				<Player />
@@ -58,7 +59,11 @@ function App() {
 				<MyNavMini />
 			</div>
 			<audio id="myAudio">
-				{/* <!-- <source id="audioSource" src="https://cdns-preview-8.dzcdn.net/stream/c-89dffbddf9f3f2a501d4760ea8215419-3.mp3" type="audio/mp3" /> --> */}
+				<source
+					id="audioSource"
+					src={trackPlaying.preview}
+					type="audio/mp3"
+				/>
 			</audio>
 		</div>
 	);

@@ -2,11 +2,11 @@
 import { combineReducers } from "redux";
 
 import homeReducer from "./homeReducer";
-import forecastReducer from "./forecastReducer";
+import trackPlayingReducer from "./trackPlayingReducer";
 
 const rootReducer = combineReducers({
 	home: homeReducer,
-	forecast: forecastReducer,
+	trackPlaying: trackPlayingReducer,
 });
 
 export default rootReducer;

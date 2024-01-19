@@ -4,7 +4,7 @@ export const storeHome = (home) => ({
 	type: "STORE_HOME",
 	payload: home,
 });
-export const storeForecast = (forecast) => ({
-	type: "STORE_FORECAST",
-	payload: forecast,
+export const storeTrackPlaying = (trackPlaying) => ({
+	type: "STORE_TRACK_PLAYING",
+	payload: trackPlaying,
 });
