@@ -1,10 +1,10 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const ButtonLink = ({ to, children, variant = "link", className }) => {
+const ButtonLink = ({ to, children, variant = "link", className, style }) => {
 	return (
 		<Link to={to}>
-			<Button variant={variant} className={className}>
+			<Button variant={variant} className={className} style={style}>
 				{children}
 			</Button>
 		</Link>

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 const Home = () => {
 	const home = useSelector((store) => store.home.home);
 	const generi = ["Latino", "Mint", "Gaming", "Out Now", "Afro", "Party"];
@@ -14,7 +13,7 @@ const Home = () => {
 			{home ? (
 				<Container
 					fluid
-					className="ml-sm-auto px-4 pt-5 bg-dark position-relative">
+					className="px-4 pt-5 bg-dark position-relative">
 					<div id="navigationButtons" className="position-absolute">
 						<Button variant="link">
 							<i className="bi bi-chevron-left bg-black p-1 me-2 circle"></i>
@@ -87,24 +86,27 @@ const Home = () => {
 									<>
 										{index < 6 && (
 											<Col xs={4}>
-												<div className="d-flex align-items-center bg-g2d mb-2 me-0 rounded-2">
-													<div>
-														<img
-															src={
-																track.album
-																	.cover
-															}
-															alt="Immagine playlist"
-															width="80px"
-															className="img-fluid rounded-start"
-														/>
+												<Link
+													to={`/albumId/${track.album.id}`}>
+													<div className="d-flex align-items-center bg-g2d mb-2 me-0 rounded-2">
+														<div>
+															<img
+																src={
+																	track.album
+																		.cover
+																}
+																alt="Immagine playlist"
+																width="80px"
+																className="img-fluid rounded-start"
+															/>
+														</div>
+														<div>
+															<p className=" mb-0 ms-2">
+																{generi[index]}
+															</p>
+														</div>
 													</div>
-													<div>
-														<p className=" mb-0 ms-2">
-															{generi[index]}
-														</p>
-													</div>
-												</div>
+												</Link>
 											</Col>
 										)}
 									</>
@@ -137,15 +139,18 @@ const Home = () => {
 											<Col
 												xs={6}
 												className="justify-content-center d-flex g-2">
-												<img
-													src={
-														home[index + 15].album
-															.cover
-													}
-													alt="Immagine playlist"
-													width="180px"
-													className="img-fluid rounded-2"
-												/>
+												<Link
+													to={`/albumId/${track.album.id}`}>
+													<img
+														src={
+															home[index + 15]
+																.album.cover
+														}
+														alt="Immagine playlist"
+														width="180px"
+														className="img-fluid rounded-2"
+													/>
+												</Link>
 											</Col>
 										)}
 									</>
@@ -174,17 +179,23 @@ const Home = () => {
 									return (
 										<>
 											{index < 6 && (
-												<img
-													src={
+												<Link
+													to={`/albumId/${
 														home[index + 10].album
-															.cover
-													}
-													alt="copertina album"
-													style={{
-														width: "50%",
-													}}
-													className="rounded-2 p-1"
-												/>
+															.id
+													}`}>
+													<img
+														src={
+															home[index + 10]
+																.album.cover
+														}
+														alt="copertina album"
+														style={{
+															width: "50%",
+														}}
+														className="rounded-2 p-1"
+													/>
+												</Link>
 											)}
 										</>
 									);

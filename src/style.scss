@@ -97,21 +97,20 @@ nav {
 	&:hover {
 		background-color: rgba(255, 255, 255, 0.1);
 
+		.play-button {
+			display: block !important;
+		}
 		.track-index {
-			.index-number {
-				// display: none;
-			}
-
-			.play-button {
-				display: block !important;
-			}
+			display: none;
 		}
 	}
 
 	.track-index {
 		display: flex;
 		align-items: center;
-
+		&:hover {
+			display: none;
+		}
 		.index-number {
 			display: block;
 		}

@@ -46,7 +46,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		fetchHomeSection("eminem");
+		fetchHomeSection("queen");
 		console.log(store);
 	}, []);
 
@@ -57,7 +57,7 @@ function App() {
 					path="/"
 					element={
 						<div
-							className="d-flex vh-100"
+							className="d-flex "
 							style={{ marginBottom: "120px" }}>
 							<MyNav />
 							<Home />
@@ -68,7 +68,7 @@ function App() {
 					path="/albumId/:albumId"
 					element={
 						<div
-							className="d-flex vh-100"
+							className="d-flex"
 							style={{ marginBottom: "120px" }}>
 							<MyNav />
 							<Album />

@@ -47,238 +47,167 @@ const Album = () => {
 	}, []);
 	return (
 		<>
-			<Container fluid className="sidebar d-flex p-0 vh-100">
-				{album ? (
-					<main
-						id="main-content"
-						className="container-fluid p-0"
-						style={{ backgroundColor: "black" }}>
-						<section>
-							<div
-								className="container-fluid position-relative"
-								id="albumWrapper">
-								<div
-									id="albumInfoWrapper"
-									className="container-fluid pt-5">
-									<Row className="pt-5">
-										<Col
-											md={4}
-											lg={3}
-											className="align-self-end text-center text-sm-start">
-											<img
-												id="albumCover"
-												src={album.cover_big}
-												className="img-fluid mb-3"
-												alt="img placeholder"
-												// 	style="
-												// 	width: 300px;
-												// 	box-shadow: -1px -1px 110px 9px rgba(0, 0, 0, 0.72);
-												// 	-webkit-box-shadow: -1px -1px 110px 9px
-												// 		rgba(0, 0, 0, 0.72);
-												// 	-moz-box-shadow: -1px -1px 110px 9px
-												// 		rgba(0, 0, 0, 0.72);
-												// "
-											/>
-										</Col>
-										<Col className=" align-self-end">
-											<p
-												style={{
-													fontSize: "1.2vw",
-													margin: "0",
-												}}
-												className="d-none d-sm-block text-white fw-bold">
-												ALBUM
-											</p>
-											<h1
-												id="albumTitle-desktop"
-												className="mt-0 pb-4 fw-bold text-white display-5 d-none d-sm-block">
-												{album.title}
-											</h1>
+			{album ? (
+				<Container fluid className="p-0 bg-black">
+					<Row className="g-4 m-4">
+						<Col md={4} lg={3} className="text-center">
+							<img
+								id="albumCover"
+								src={album.cover_big}
+								className="img-fluid mb-3"
+								alt="img placeholder"
+								// style={{
+								// 	width: "300px",
+								// 	boxShadow:
+								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
+								// 	WebkitBoxShadow:
+								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
+								// 	MozBoxShadow:
+								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
+								// }}
+							/>
+						</Col>
+						<Col className="d-flex flex-column justify-content-evenly">
+							<p className="text-white fw-bold">ALBUM</p>
+							<h1
+								id="albumTitle-desktop"
+								className="fw-bold text-white display-5">
+								{album.title}
+							</h1>
 
-											<h1
-												id="albumTitle-mobile"
-												className="mt-0 text-white fw-bold d-sm-none"></h1>
-											<div className="d-flex flex-wrap align-items-center mb-3">
-												<img
-													id="artistPicture"
-													src=""
-													alt="artist placeholder"
-													style={{
-														width: "24px",
-														height: "24px",
-														borderRadius: "50%",
-													}}
-													className="me-2"
-												/>
-												<ButtonLink
-													to="/"
-													id="artistName"
-													className="fw-bold text-decoration-none text-white"></ButtonLink>
-												<span className="text-white d-none d-sm-block">
-													&nbsp;•&nbsp;
-												</span>
-												<span
-													id="year"
-													className="text-white fw-bold d-none d-sm-block">
-													{album.release_date}
-												</span>
-												<span className="d-lg-block text-white">
-													&nbsp;•&nbsp;
-												</span>
-												<span className="text-white d-lg-block fw-bold">
-													{album.nb_tracks}
-												</span>
-												<span className="text-white d-lg-block">
-													{album.duration}
-												</span>
-											</div>
-											<span className="d-sm-none text-secondary mb-0">
-												<p className="mb-0 d-inline"></p>
-											</span>
-										</Col>
-									</Row>
-								</div>
+							<div className="d-flex flex-wrap align-items-center">
+								<ButtonLink
+									to={`/artist/${album.artist.id}`}
+									className="fw-bold text-decoration-none text-white p-0">
+									<img
+										id="artistPicture"
+										src={album.artist.picture}
+										alt="artist placeholder"
+										className="me-3"
+										style={{
+											width: "50px",
+											height: "50px",
+											borderRadius: "50%",
+										}}
+									/>
+									{album.artist.name}
+								</ButtonLink>
+								<span className="text-white mx-2">•</span>
+								<span id="year" className="text-white fw-bold ">
+									{album.release_date.substring(0, 4)}
+								</span>
 							</div>
-						</section>
-
-						<div
-							id="albumGradient"
-							className="container-fluid mb-3">
-							<div className="container-fluid">
-								<div className="player d-flex justify-content-between align-items-center bg-transparent">
-									<div className="d-flex align-items-center">
-										<i
-											className="bi bi-play-circle-fill d-none d-sm-block me-4 playButtonLinkclassName"
-											style={{
-												color: "#1ed760",
-												fontSize: "50px",
-											}}></i>
-										<i
-											className="bi bi-heart d-md-block ps-2 me-4 text-secondary"
-											style={{ fontSize: "30px" }}></i>
-										<i
-											className="bi bi-arrow-down-circle d-md-block me-4 text-secondary"
-											style={{ fontSize: "30px" }}></i>
-										<i
-											className="bi bi-three-dots-vertical d-sm-none text-secondary"
-											style={{ fontSize: "30px" }}></i>
-										<ButtonLink
-											type="ButtonLink"
-											className="btn btn-black text-secondary fs-1 mb-4 p-0 d-none d-sm-block">
-											...
-										</ButtonLink>
-									</div>
-									<div className="d-flex align-items-center">
-										<i
-											className="bi bi-shuffle me-4 d-sm-none text-secondary"
-											style={{ fontSize: "30px" }}></i>
-										<i
-											className="bi bi-play-circle-fill d-sm-none playButtonLinkclassName"
-											style={{
-												color: "#1ed760",
-												fontSize: "50px",
-											}}></i>
-									</div>
-								</div>
+							<div className="d-none d-sm-block">
+								<p className="text-white m-0">
+									Numero tracce: {album.nb_tracks}
+								</p>
+								<p className="text-white m-0">
+									Durata:{" "}
+									{formatTrackDuration(album.duration)}
+								</p>
 							</div>
+						</Col>
+					</Row>
 
-							<Container fluid className="d-none d-sm-block">
-								<Row className="border-bottom text-center pb-2">
-									<Col xs={1}>
-										<span className="me-3 text-center">
-											#
-										</span>
-									</Col>
-									<Col xs={11} sm={5} className="text-start">
-										<span>TITOLO</span>
-									</Col>
-									<Col xs={11} sm={5}>
-										<span>RIPRODUZIONI</span>
-									</Col>
-									<Col xs={1}>
-										<span>
-											<i className="bi bi-stopwatch"></i>
-										</span>
-									</Col>
-								</Row>
-
-								<Row
-									className="mt-4 track-row"
-									id="tracksContainer">
-									{album.tracks.data.map((track, index) => {
-										return (
-											<>
-												<Col
-													xs={1}
-													className="d-none d-sm-flex justify-content-center align-items-center">
-													<Button
-														variant="link"
-														className="play-button fs-2 d-none text-white playButtonClass p-0 me-3">
-														<i className="bi bi-play-circle-fill fs-2"></i>
-													</Button>
-													<span className="text-white">
-														{index + 1}
-													</span>
-												</Col>
-												<Col
-													xs={10}
-													sm={5}
-													className="ps-0 d-flex flex-column justify-content-center">
-													<ButtonLink className="text-white p-0">
-														{track.title}
-													</ButtonLink>
-													<ButtonLink
-														to={`/artist/${track.artist.id}`}
-														className="p-0">
-														{track.artist.name}
-													</ButtonLink>
-												</Col>
-												<Col
-													xs={4}
-													sm={3}
-													className="d-none d-sm-flex align-items-center justify-content-end">
-													<span>
-														{track.rank.toLocaleString()}
-													</span>
-												</Col>
-												<Col
-													xs={3}
-													className="d-none d-sm-flex justify-content-end align-items-center">
-													<Button variant="link">
-														<i className="bi bi-heart fs-5 me-2"></i>
-													</Button>
-
-													<span className="text-white me-4">
-														{formatTrackDuration(
-															track.duration
-														)}
-													</span>
-												</Col>
-												{/* <Col
-													xs={1}
-													className="d-sm-none">
-													<div className="d-flex justify-content-end align-items-center">
-														<i
-															className="bi bi-three-dots-vertical text-secondary pe-1 mt-2"
-															style={{
-																fontSize:
-																	"20px",
-															}}></i>
-													</div>
-												</Col> */}
-											</>
-										);
-									})}
-								</Row>
-							</Container>
-						</div>
-					</main>
-				) : (
-					<div className="spinner-border text-light" role="status">
-						<span className="sr-only"></span>
+					<div
+						className="d-flex justify-content-start align-items-baseline my-3 mb-3"
+						id="albumGradient">
+						<ButtonLink style={{ borderRadius: "100%" }}>
+							<i className="bi bi-play-circle-fill display-3 text-success"></i>
+						</ButtonLink>
+						<ButtonLink>
+							<i className="bi bi-heart fs-4"></i>
+						</ButtonLink>
+						<ButtonLink>
+							<i className="bi bi-arrow-down-circle fs-4"></i>
+						</ButtonLink>
+						<ButtonLink>
+							<i className="bi bi-three-dots fs-4"></i>
+						</ButtonLink>
 					</div>
-				)}
-			</Container>
+
+					<Row className="text-center">
+						<Col xs={1}>
+							<span className="me-3 text-center">#</span>
+						</Col>
+						<Col xs={8} sm={5} className="text-start">
+							<span>TITOLO</span>
+						</Col>
+						<Col xs={3} className="d-none d-sm-block">
+							<span>RIPRODUZIONI</span>
+						</Col>
+						<Col xs={3} sm={2} className="ms-auto">
+							<span>
+								<i className="bi bi-stopwatch"></i>
+							</span>
+						</Col>
+					</Row>
+
+					<hr />
+
+					{album.tracks.data.map((track, index) => {
+						return (
+							<>
+								<Row className="mt-4 track-row">
+									<Col
+										xs={1}
+										className="d-flex justify-content-center align-items-center">
+										<Button
+											variant="link"
+											className="play-button fs-2 d-none text-white playButtonClass p-0">
+											<i className="bi bi-play-circle-fill fs-2"></i>
+										</Button>
+										<span className="text-white track-index">
+											{index + 1}
+										</span>
+									</Col>
+									<Col
+										xs={7}
+										sm={5}
+										className="ps-0 d-flex flex-column justify-content-center text-truncate">
+										<ButtonLink className="text-white p-0">
+											{track.title}
+										</ButtonLink>
+										<ButtonLink
+											to={`/artist/${track.artist.id}`}
+											className="p-0">
+											{track.artist.name}
+										</ButtonLink>
+									</Col>
+									<Col
+										xs={4}
+										sm={3}
+										className="d-none d-sm-flex align-items-center justify-content-center">
+										<span>
+											{track.rank.toLocaleString()}
+										</span>
+									</Col>
+									<Col
+										xs={1}
+										className="d-flex justify-content-center align-items-center">
+										<Button variant="link" className="p-0">
+											<i className="bi bi-heart fs-5"></i>
+										</Button>
+									</Col>
+									<Col
+										xs={1}
+										className="d-flex justify-content-center align-items-center mx-auto">
+										<span className="text-white">
+											{formatTrackDuration(
+												track.duration
+											)}
+										</span>
+									</Col>
+								</Row>
+							</>
+						);
+					})}
+				</Container>
+			) : (
+				<div className="spinner-border text-light" role="status">
+					<span className="sr-only"></span>
+				</div>
+			)}
 		</>
 	);
 };
