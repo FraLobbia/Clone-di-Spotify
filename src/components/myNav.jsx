@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import ButtonLink from "./ButtonLink";
 
 const MyNav = () => {
 	return (
@@ -8,64 +8,64 @@ const MyNav = () => {
 				style={{ minWidth: "280px" }}>
 				<ul className="nav flex-column">
 					<li className="nav-item">
-						<Button variant="link" to="/#">
+						<ButtonLink to="/">
 							<i className="bi bi-three-dots fs-3 me-3"></i>
-						</Button>
+						</ButtonLink>
 					</li>
 					<li className="nav-item">
-						<Button variant="link" to="/#">
+						<ButtonLink to="/">
 							<i className="bi bi-house-door fs-3 me-3 me-3"></i>
 							{""}
 							Home
-						</Button>
+						</ButtonLink>
 					</li>
 					<li className="nav-item">
-						<Button variant="link" to="/#">
+						<ButtonLink to="/">
 							<i className="bi bi-search fs-3 me-3"></i> Cerca
-						</Button>
+						</ButtonLink>
 					</li>
 					<li className="nav-item">
-						<Button variant="link" to="/#">
+						<ButtonLink to="/">
 							<i className="bi bi-collection fs-3 me-3"></i> La
 							tua libreria
-						</Button>
+						</ButtonLink>
 					</li>
 					<li className="nav-item mt-4">
-						<Button variant="link" to="/#">
+						<ButtonLink to="/">
 							<i className="bi bi-plus-square-fill fs-3 me-3"></i>
 							{""}
 							Crea playlist
-						</Button>
+						</ButtonLink>
 					</li>
 					<li className="nav-item">
-						<Button variant="link" to="/#">
+						<ButtonLink to="/liked-tracks">
 							<i className="bi bi-calendar-heart fs-3 me-3"></i>
 							{""}
 							Brani che ti piacciono
-						</Button>
+						</ButtonLink>
 					</li>
 					<li className="nav-item">
-						<Button variant="link" to="/#">
+						<ButtonLink to="/">
 							<i className="bi bi-bookmark-check fs-3 me-3"></i> I
 							tuoi episodi
-						</Button>
+						</ButtonLink>
 					</li>
 				</ul>
 
 				<hr />
 
 				<div className="d-flex flex-column align-items-start ms-1">
-					<Button variant="link">Ultimate Winter party</Button>
-					<Button variant="link">Caffè del Buongiorno</Button>
-					<Button variant="link">Japanese Lofi Chill</Button>
-					<Button variant="link">Positive Vibes</Button>
-					<Button variant="link">Mix Anni 2010</Button>
-					<Button variant="link">Techno Bunker</Button>
-					<Button variant="link">Happy Beats</Button>
-					<Button variant="link">Dance Hits</Button>
-					<Button variant="link">Christmas Jazz</Button>
-					<Button variant="link">Feel Good Piano</Button>
-					<Button variant="link">Energy Booster</Button>
+					<ButtonLink to="/">Ultimate Winter party</ButtonLink>
+					<ButtonLink to="/">Caffè del Buongiorno</ButtonLink>
+					<ButtonLink to="/">Japanese Lofi Chill</ButtonLink>
+					<ButtonLink to="/">Positive Vibes</ButtonLink>
+					<ButtonLink to="/">Mix Anni 2010</ButtonLink>
+					<ButtonLink to="/">Techno Bunker</ButtonLink>
+					<ButtonLink to="/">Happy Beats</ButtonLink>
+					<ButtonLink to="/">Dance Hits</ButtonLink>
+					<ButtonLink to="/">Christmas Jazz</ButtonLink>
+					<ButtonLink to="/">Feel Good Piano</ButtonLink>
+					<ButtonLink to="/">Energy Booster</ButtonLink>
 				</div>
 			</nav>
 		</>

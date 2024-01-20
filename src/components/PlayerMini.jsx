@@ -14,7 +14,7 @@ const PlayerMini = () => {
 						alt=""
 						style={{ height: "40px" }}
 					/>
-					<div class="fs-6 px-3 flex-column d-flex">
+					<div className="fs-6 px-3 flex-column d-flex">
 						<Button variant="link" className="py-0 text-white">
 							{trackPlaying.title_short}
 						</Button>

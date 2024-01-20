@@ -27,13 +27,9 @@ const Player = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(trackPlaying);
-		console.log("ciao");
+		console.log("in riproduzione", trackPlaying);
+		// console.log("ciao");
 	}, [flag]);
-
-	useEffect(() => {
-		console.log(isPlaying);
-	}, [isPlaying]);
 
 	return (
 		<Container fluid className="d-none d-md-block bg-black" id="player">
@@ -44,7 +40,7 @@ const Player = () => {
 						alt="cover dell'album"
 						style={{ maxWidth: "70px" }}
 					/>
-					<div class="d-flex flex-column">
+					<div className="d-flex flex-column">
 						<Button variant="link" className="py-0 text-white">
 							{trackPlaying.title}
 						</Button>
@@ -53,7 +49,7 @@ const Player = () => {
 						</Button>
 					</div>
 					<Button variant="link">
-						<i class="bi bi-heart"></i>
+						<i className="bi bi-heart"></i>
 					</Button>
 				</Col>
 

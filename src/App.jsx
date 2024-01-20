@@ -9,6 +9,8 @@ import { token } from "./token";
 import { useDispatch, useSelector } from "react-redux";
 import { storeHome, storeTrackPlaying } from "./redux/actions";
 import store from "./redux/store";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Album from "./components/Album";
 function App() {
 	const dispatch = useDispatch();
 	const home = useSelector((store) => store.home);
@@ -18,7 +20,7 @@ function App() {
 	);
 	const audio = document.getElementById("myAudio");
 
-	const handleSection = async (artistName) => {
+	const fetchHomeSection = async (artistName) => {
 		try {
 			let response = await fetch(
 				"https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
@@ -44,19 +46,36 @@ function App() {
 	};
 
 	useEffect(() => {
-		handleSection("eminem");
+		fetchHomeSection("eminem");
 		console.log(store);
 	}, []);
 
 	return (
-		<div className="App">
-			<div className="d-flex vh-100">
-				<MyNav />
-
-				<div className="container-fluid  d-flex p-0">
-					<Home />
-				</div>
-			</div>
+		<BrowserRouter>
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<div
+							className="d-flex vh-100"
+							style={{ marginBottom: "120px" }}>
+							<MyNav />
+							<Home />
+						</div>
+					}
+				/>
+				<Route
+					path="/albumId/:albumId"
+					element={
+						<div
+							className="d-flex vh-100"
+							style={{ marginBottom: "120px" }}>
+							<MyNav />
+							<Album />
+						</div>
+					}
+				/>
+			</Routes>
 			{trackPlaying && (
 				<>
 					<div>
@@ -75,7 +94,7 @@ function App() {
 					</audio>
 				</>
 			)}
-		</div>
+		</BrowserRouter>
 	);
 }
 
