@@ -32,19 +32,24 @@ const Player = () => {
 	}, [flag]);
 
 	return (
-		<Container fluid className="d-none d-md-block bg-black" id="player">
+		<Container
+			fluid
+			className="d-none d-md-block bg-black border-top border-tertiary"
+			id="player">
 			<Row className="py-3 fs-5 align-items-center">
-				<Col className="d-flex align-items-center justify-content-start text-start ms-3">
+				<Col className="d-flex align-items-center justify-content-start ms-3">
 					<img
 						src={trackPlaying.album.cover_medium}
 						alt="cover dell'album"
 						style={{ maxWidth: "70px" }}
 					/>
 					<div className="d-flex flex-column">
-						<Button variant="link" className="py-0 text-white">
+						<Button
+							variant="link"
+							className="py-0 text-white text-start">
 							{trackPlaying.title}
 						</Button>
-						<Button variant="link" className="py-0">
+						<Button variant="link" className="py-0 text-start">
 							{trackPlaying.artist.name}
 						</Button>
 					</div>

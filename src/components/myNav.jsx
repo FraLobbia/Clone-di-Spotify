@@ -1,10 +1,11 @@
+import { Container } from "react-bootstrap";
 import ButtonLink from "./ButtonLink";
 
-const MyNav = () => {
+const MyNav = ({ children }) => {
 	return (
-		<>
+		<Container fluid className="d-flex">
 			<nav
-				className=" d-none d-md-block bg-black"
+				className="d-none d-md-block bg-black border-end border-tertiary "
 				style={{ minWidth: "280px" }}>
 				<ul className="nav flex-column">
 					<li className="nav-item">
@@ -38,7 +39,7 @@ const MyNav = () => {
 						</ButtonLink>
 					</li>
 					<li className="nav-item">
-						<ButtonLink to="/liked-tracks">
+						<ButtonLink to="/liked-songs">
 							<i className="bi bi-calendar-heart fs-3 me-3"></i>
 							{""}
 							Brani che ti piacciono
@@ -68,7 +69,8 @@ const MyNav = () => {
 					<ButtonLink to="/">Energy Booster</ButtonLink>
 				</div>
 			</nav>
-		</>
+			{children}
+		</Container>
 	);
 };
 

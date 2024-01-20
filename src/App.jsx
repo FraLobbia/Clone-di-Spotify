@@ -11,6 +11,8 @@ import { storeHome, storeTrackPlaying } from "./redux/actions";
 import store from "./redux/store";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Album from "./components/Album";
+import NotFound from "./components/NotFound";
+import LikedSongs from "./components/LikedSongs";
 function App() {
 	const dispatch = useDispatch();
 	const home = useSelector((store) => store.home);
@@ -51,50 +53,36 @@ function App() {
 	}, []);
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<div
-							className="d-flex "
-							style={{ marginBottom: "120px" }}>
-							<MyNav />
-							<Home />
+		<>
+			<BrowserRouter>
+				<MyNav>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/albumId/:albumId" element={<Album />} />
+						<Route path="/liked-songs" element={<LikedSongs />} />
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+				</MyNav>
+				{trackPlaying && (
+					<>
+						<div>
+							<div className="fixed-bottom container-fluid p-0">
+								<Player />
+								<PlayerMini />
+								<MyNavMini />
+							</div>
 						</div>
-					}
-				/>
-				<Route
-					path="/albumId/:albumId"
-					element={
-						<div
-							className="d-flex"
-							style={{ marginBottom: "120px" }}>
-							<MyNav />
-							<Album />
-						</div>
-					}
-				/>
-			</Routes>
-			{trackPlaying && (
-				<>
-					<div>
-						<div className="fixed-bottom container-fluid p-0">
-							<Player />
-							<PlayerMini />
-							<MyNavMini />
-						</div>
-					</div>
-					<audio id="myAudio">
-						<source
-							id="audioSource"
-							src={trackPlaying.preview}
-							type="audio/mp3"
-						/>
-					</audio>
-				</>
-			)}
-		</BrowserRouter>
+						<audio id="myAudio">
+							<source
+								id="audioSource"
+								src={trackPlaying.preview}
+								type="audio/mp3"
+							/>
+						</audio>
+					</>
+				)}
+			</BrowserRouter>
+		</>
 	);
 }
 

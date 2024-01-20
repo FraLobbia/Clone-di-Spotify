@@ -20,20 +20,23 @@ $body-color: white;
 
 // 4. Include any default map overrides here
 
-$h7-font-size: $font-size-base * 1 !default;
-$h8-font-size: $font-size-base * 0.75 !default;
-$h9-font-size: $font-size-base * 0.5 !default;
-$h10-font-size: $font-size-base * 0.25 !default;
-
 $font-sizes-new: (
-	7: $h7-font-size,
-	8: $h8-font-size,
-	9: $h9-font-size,
-	10: $h10-font-size,
+	7: $font-size-base * 1,
+	8: $font-size-base * 0.75,
+	9: $font-size-base * 0.5,
+	10: $font-size-base * 0.25,
 );
 
 $font-sizes: map-merge($font-sizes, $font-sizes-new);
 
+$theme-colors-new: (
+	"tertiary": rgb(64, 64, 64),
+);
+
+$theme-colors: map-merge(
+	$map1: $theme-colors,
+	$map2: $theme-colors-new,
+);
 // 5. Include remainder of required parts
 @import "../node_modules/bootstrap/scss/maps";
 @import "../node_modules/bootstrap/scss/mixins";
