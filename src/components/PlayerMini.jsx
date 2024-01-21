@@ -7,7 +7,7 @@ const PlayerMini = () => {
 	return (
 		<Row
 			id="playerMini"
-			className="d-md-none py-3 mx-1 rounded-3 flex-nowrap">
+			className="d-md-none bg-dark-gray py-3 mx-1 rounded-3 flex-nowrap">
 			<div className="d-flex align-items-center flex-grow-1 flex-shrink-1 text-truncate">
 				{trackPlaying && (
 					<>

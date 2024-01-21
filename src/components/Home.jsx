@@ -118,7 +118,7 @@ const Home = () => {
 											<Col xs={4}>
 												<Link
 													to={`/albumId/${track.album.id}`}>
-													<div className="d-flex align-items-center bg-g2d mb-2 me-0 rounded-2">
+													<div className="d-flex align-items-center bg-dark-gray mb-2 me-0 rounded-2">
 														<div>
 															<img
 																src={

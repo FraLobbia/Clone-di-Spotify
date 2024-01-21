@@ -7,7 +7,7 @@ import { token } from "../token";
 import { storeAlbum } from "../redux/actions";
 
 const LikedSongs = () => {
-	const { likedSong } = useSelector((store) => store.likedSongs);
+	const { likedSongs } = useSelector((store) => store.likedSongs);
 	const album = useSelector((store) => store.album.album);
 	const { albumId } = useParams();
 	const dispatch = useDispatch();
@@ -22,9 +22,13 @@ const LikedSongs = () => {
 		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
 	};
 
+	useEffect(() => {
+		console.log(likedSongs);
+	}, []);
+
 	return (
 		<>
-			{likedSong ? (
+			{likedSongs ? (
 				<Container fluid className="p-0 bg-black">
 					<Row className="g-4 m-4">
 						<Col className="d-flex flex-column justify-content-evenly">
@@ -33,7 +37,7 @@ const LikedSongs = () => {
 							</h1>
 
 							<p className="text-white m-0">
-								Numero tracce: {likedSong.length}
+								Numero tracce: {likedSongs.length}
 							</p>
 						</Col>
 					</Row>
@@ -74,7 +78,7 @@ const LikedSongs = () => {
 
 					<hr />
 
-					{likedSong.map((track, index) => {
+					{likedSongs.map((track, index) => {
 						return (
 							<>
 								<Row className="mt-4 track-row">

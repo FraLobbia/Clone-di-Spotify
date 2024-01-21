@@ -1,21 +1,16 @@
 @import "./bootstrap-overrides";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
-.App {
-	background-color: black;
-}
-
 body {
 	font-family: "CircularStd", sans-serif;
+	background-color: black;
+	margin-bottom: 300px;
 }
 
 button:hover {
 	color: white !important;
 }
 
-nav {
-	z-index: 999;
-}
 #player {
 	z-index: 9999;
 	i {
@@ -55,7 +50,6 @@ nav {
 }
 
 #playerMini {
-	background-color: #282828;
 	img {
 		@media screen and (max-width: 450px) {
 			display: none;
@@ -88,19 +82,10 @@ nav {
 
 #play-button {
 	transition: transform ease-in-out;
+	&:hover {
+		transform: scale(1.1);
+	}
 }
-
-#play-button:hover {
-	transform: scale(1.1);
-}
-
-.bg-g2d {
-	background-color: #2d2d2d;
-}
-
-// .fs10 {
-// 	font-size: 8px;
-// }
 
 // sez. album che all'hover lo sfondo dventa bianco opaco e il pulsante diventa play
 
