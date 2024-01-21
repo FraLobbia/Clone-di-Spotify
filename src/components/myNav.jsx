@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const MyNav = ({ children }) => {
 	return (
-		<Container fluid className="d-flex">
+		<Container fluid className="d-flex vh-100">
 			<nav
 				className="d-none d-md-block bg-black border-end border-tertiary "
 				style={{ minWidth: "280px" }}>

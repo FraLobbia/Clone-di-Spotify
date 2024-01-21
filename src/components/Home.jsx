@@ -1,13 +1,43 @@
 import { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { token } from "../token";
+import { storeHome, storeTrackPlaying } from "../redux/actions";
 const Home = () => {
 	const home = useSelector((store) => store.home.home);
 	const generi = ["Latino", "Mint", "Gaming", "Out Now", "Afro", "Party"];
+	const dispatch = useDispatch();
+	const fetchHomeSection = async (artistName) => {
+		try {
+			let response = await fetch(
+				"https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
+					artistName,
+				{
+					method: "GET",
+					headers: {
+						"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+						"X-RapidAPI-Key": token,
+					},
+				}
+			);
+			if (response.ok) {
+				let { data } = await response.json();
+				dispatch(storeHome(data));
+				dispatch(storeTrackPlaying(data[5]));
+			} else {
+				throw new Error("Error in fetching songs");
+			}
+		} catch (err) {
+			console.log("error", err);
+		}
+	};
+
 	useEffect(() => {
-		console.log(home);
+		fetchHomeSection("queen");
+		// console.log(home);
 	}, []);
+
 	return (
 		<>
 			{home ? (

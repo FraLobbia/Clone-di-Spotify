@@ -56,6 +56,21 @@ nav {
 
 #playerMini {
 	background-color: #282828;
+	img {
+		@media screen and (max-width: 450px) {
+			display: none;
+		}
+	}
+	button:where(.heart, .speaker) {
+		@media screen and (max-width: 400px) {
+			display: none;
+		}
+	}
+	button:where(.dots) {
+		@media screen and (min-width: 400px) {
+			display: none;
+		}
+	}
 }
 
 #friendsActivity > a {

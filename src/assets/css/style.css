@@ -12198,6 +12198,21 @@ nav {
 #playerMini {
   background-color: #282828;
 }
+@media screen and (max-width: 450px) {
+  #playerMini img {
+    display: none;
+  }
+}
+@media screen and (max-width: 400px) {
+  #playerMini button:where(.heart, .speaker) {
+    display: none;
+  }
+}
+@media screen and (min-width: 400px) {
+  #playerMini button:where(.dots) {
+    display: none;
+  }
+}
 
 #friendsActivity > a {
   overflow: hidden;

@@ -7,110 +7,34 @@ import { token } from "../token";
 import { storeAlbum } from "../redux/actions";
 
 const LikedSongs = () => {
-	const likedSong = useSelector((store) => store.likedSongs.likedSongs);
+	const { likedSong } = useSelector((store) => store.likedSongs);
 	const album = useSelector((store) => store.album.album);
 	const { albumId } = useParams();
 	const dispatch = useDispatch();
-	const [flag, setFlag] = useState(false);
-	// const fetchAlbumSection = async (albumId) => {
-	// 	const endpoint = `https://deezerdevs-deezer.p.rapidapi.com/album/${albumId}`;
-	// 	const options = {
-	// 		method: "GET",
-	// 		headers: {
-	// 			"X-RapidAPI-Key": token,
-	// 			"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-	// 		},
-	// 	};
-	// 	const response = await fetch(endpoint, options);
-	// 	if (response.ok) {
-	// 		const data = await response.json();
-	// 		console.log(data);
-	// 		dispatch(storeAlbum(data));
-	// 	}
-	// };
-	// const formatTrackDuration = (durationInSeconds) => {
-	// 	const minutes = Math.floor(durationInSeconds / 60);
-	// 	const seconds = durationInSeconds % 60;
-	// 	return ` ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-	// };
-	// const [flag, setFlag] = useState(false);
+
 	const formatTrackDuration = (durationInSeconds) => {
 		const minutes = Math.floor(durationInSeconds / 60);
 		const seconds = durationInSeconds % 60;
 		return ` ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 	};
-	useEffect(() => {
-		setFlag(!flag);
-	}, []);
 
-	useEffect(() => {
-		// fetchAlbumSection(albumId);
-	}, []);
+	const isLiked = (arrayToCheck, idToCheck) => {
+		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
+	};
 
-	useEffect(() => {
-		// console.log("Album:", album);
-	}, []);
 	return (
 		<>
 			{likedSong ? (
 				<Container fluid className="p-0 bg-black">
 					<Row className="g-4 m-4">
-						<Col md={4} lg={3} className="text-center">
-							<img
-								id="albumCover"
-								src={album.cover_big}
-								className="img-fluid mb-3"
-								alt="img placeholder"
-								// style={{
-								// 	width: "300px",
-								// 	boxShadow:
-								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
-								// 	WebkitBoxShadow:
-								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
-								// 	MozBoxShadow:
-								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
-								// }}
-							/>
-						</Col>
 						<Col className="d-flex flex-column justify-content-evenly">
-							<p className="text-white fw-bold">ALBUM</p>
-							<h1
-								id="albumTitle-desktop"
-								className="fw-bold text-white display-5">
-								{album.title}
+							<h1 className="fw-bold text-white display-5">
+								Brani che ti piacciono
 							</h1>
 
-							<div className="d-flex flex-wrap align-items-center">
-								<ButtonLink
-									to={`/artist/${album.artist.id}`}
-									className="fw-bold text-decoration-none text-white p-0">
-									<img
-										id="artistPicture"
-										src={album.artist.picture}
-										alt="artist placeholder"
-										className="me-3"
-										style={{
-											width: "50px",
-											height: "50px",
-											borderRadius: "50%",
-										}}
-									/>
-									{album.artist.name}
-								</ButtonLink>
-								<span className="text-white mx-2">•</span>
-								<span id="year" className="text-white fw-bold ">
-									{album.release_date.substring(0, 4)}
-								</span>
-							</div>
-							<div className="d-none d-sm-block">
-								<p className="text-white m-0">
-									Numero tracce: {album.nb_tracks}
-								</p>
-								<p className="text-white m-0">
-									Durata:{" "}
-									{formatTrackDuration(album.duration)}
-								</p>
-							</div>
+							<p className="text-white m-0">
+								Numero tracce: {likedSong.length}
+							</p>
 						</Col>
 					</Row>
 
@@ -191,7 +115,15 @@ const LikedSongs = () => {
 										xs={1}
 										className="d-flex justify-content-center align-items-center">
 										<Button variant="link" className="p-0">
-											<i className="bi bi-heart fs-5"></i>
+											{/* <i
+												className={`bi bi-heart fs-5 ${
+													isLiked(
+														likedSongs,
+														track.id
+													)
+														? "text-success"
+														: ""
+												}`}></i> */}
 										</Button>
 									</Col>
 									<Col

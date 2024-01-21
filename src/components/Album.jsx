@@ -7,8 +7,8 @@ import { token } from "../token";
 import { setLikedSong, storeAlbum } from "../redux/actions";
 
 const Album = () => {
-	const album = useSelector((store) => store.album.album);
-	const likedSong = useSelector((store) => store.likedSongs);
+	const { album } = useSelector((store) => store.album);
+	const { likedSongs } = useSelector((store) => store.likedSongs);
 	const { albumId } = useParams();
 	const dispatch = useDispatch();
 
@@ -33,6 +33,11 @@ const Album = () => {
 		const seconds = durationInSeconds % 60;
 		return ` ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 	};
+
+	const isLiked = (arrayToCheck, idToCheck) => {
+		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
+	};
+
 	const [flag, setFlag] = useState(false);
 
 	useEffect(() => {
@@ -45,7 +50,7 @@ const Album = () => {
 
 	useEffect(() => {
 		console.log("Album:", album);
-		console.log("LIKED:", likedSong);
+		console.log("LIKED:", likedSongs);
 	}, []);
 	return (
 		<>
@@ -190,7 +195,12 @@ const Album = () => {
 										onClick={() =>
 											dispatch(setLikedSong(track))
 										}>
-										<i className="bi bi-heart fs-5"></i>
+										<i
+											className={`bi bi-heart fs-5 ${
+												isLiked(likedSongs, track.id)
+													? "text-success"
+													: ""
+											}`}></i>
 									</Button>
 								</Col>
 								<Col
