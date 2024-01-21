@@ -13,6 +13,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Album from "./components/Album";
 import NotFound from "./components/NotFound";
 import LikedSongs from "./components/LikedSongs";
+import ArtistPage from "./components/ArtistPage";
+
 function App() {
 	const dispatch = useDispatch();
 	const home = useSelector((store) => store.home);
@@ -59,6 +61,10 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/albumId/:albumId" element={<Album />} />
+						<Route
+							path="/artist/:artistId"
+							element={<ArtistPage />}
+						/>
 						<Route path="/liked-songs" element={<LikedSongs />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>

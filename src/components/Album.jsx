@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { token } from "../token";
-import { storeAlbum } from "../redux/actions";
+import { setLikedSong, storeAlbum } from "../redux/actions";
 
 const Album = () => {
 	const album = useSelector((store) => store.album.album);
+	const likedSong = useSelector((store) => store.likedSongs);
 	const { albumId } = useParams();
 	const dispatch = useDispatch();
 
@@ -44,6 +45,7 @@ const Album = () => {
 
 	useEffect(() => {
 		console.log("Album:", album);
+		console.log("LIKED:", likedSong);
 	}, []);
 	return (
 		<>
@@ -147,59 +149,58 @@ const Album = () => {
 
 					{album.tracks.data.map((track, index) => {
 						return (
-							<>
-								<Row className="mt-4 track-row">
-									<Col
-										xs={1}
-										className="d-flex justify-content-center align-items-center">
-										<Button
-											variant="link"
-											className="play-button fs-2 d-none text-white playButtonClass p-0">
-											<i className="bi bi-play-circle-fill fs-2"></i>
-										</Button>
-										<span className="text-white track-index">
-											{index + 1}
-										</span>
-									</Col>
-									<Col
-										xs={7}
-										sm={5}
-										className="ps-0 d-flex flex-column justify-content-center text-truncate">
-										<ButtonLink className="text-white p-0">
-											{track.title}
-										</ButtonLink>
-										<ButtonLink
-											to={`/artist/${track.artist.id}`}
-											className="p-0">
-											{track.artist.name}
-										</ButtonLink>
-									</Col>
-									<Col
-										xs={4}
-										sm={3}
-										className="d-none d-sm-flex align-items-center justify-content-center">
-										<span>
-											{track.rank.toLocaleString()}
-										</span>
-									</Col>
-									<Col
-										xs={1}
-										className="d-flex justify-content-center align-items-center">
-										<Button variant="link" className="p-0">
-											<i className="bi bi-heart fs-5"></i>
-										</Button>
-									</Col>
-									<Col
-										xs={1}
-										className="d-flex justify-content-center align-items-center mx-auto">
-										<span className="text-white">
-											{formatTrackDuration(
-												track.duration
-											)}
-										</span>
-									</Col>
-								</Row>
-							</>
+							<Row className="mt-4 track-row" key={track.title}>
+								<Col
+									xs={1}
+									className="d-flex justify-content-center align-items-center">
+									<Button
+										variant="link"
+										className="play-button fs-2 d-none text-white playButtonClass p-0">
+										<i className="bi bi-play-circle-fill fs-2"></i>
+									</Button>
+									<span className="text-white track-index">
+										{index + 1}
+									</span>
+								</Col>
+								<Col
+									xs={7}
+									sm={5}
+									className="ps-0 d-flex flex-column justify-content-center text-truncate">
+									<ButtonLink className="text-white p-0">
+										{track.title}
+									</ButtonLink>
+									<ButtonLink
+										to={`/artist/${track.artist.id}`}
+										className="p-0">
+										{track.artist.name}
+									</ButtonLink>
+								</Col>
+								<Col
+									xs={4}
+									sm={3}
+									className="d-none d-sm-flex align-items-center justify-content-center">
+									<span>{track.rank.toLocaleString()}</span>
+								</Col>
+								<Col
+									xs={1}
+									className="d-flex justify-content-center align-items-center">
+									<Button
+										variant="link"
+										className="p-0"
+										onClick={() =>
+											dispatch(setLikedSong(track))
+										}>
+										<i className="bi bi-heart fs-5"></i>
+									</Button>
+								</Col>
+								<Col
+									xs={1}
+									className="d-flex justify-content-center align-items-center mx-auto">
+									<span className="text-white">
+										{formatTrackDuration(track.duration)}
+									</span>
+								</Col>
+							</Row>
 						);
 					})}
 				</Container>

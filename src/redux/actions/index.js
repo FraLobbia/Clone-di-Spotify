@@ -1,5 +1,3 @@
-//actions/index.js
-
 export const storeHome = (home) => ({
 	type: "STORE_HOME",
 	payload: home,
@@ -16,3 +14,10 @@ export const setIsPlaying = (boolean) => ({
 	type: "SET_IS_PLAYING",
 	payload: { boolean },
 });
+
+export const setLikedSong = (track) => {
+	return {
+		type: "SET_LIKED_SONG",
+		payload: track,
+	};
+};

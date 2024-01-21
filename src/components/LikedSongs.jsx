@@ -7,47 +7,52 @@ import { token } from "../token";
 import { storeAlbum } from "../redux/actions";
 
 const LikedSongs = () => {
+	const likedSong = useSelector((store) => store.likedSongs.likedSongs);
 	const album = useSelector((store) => store.album.album);
 	const { albumId } = useParams();
 	const dispatch = useDispatch();
-
-	const fetchAlbumSection = async (albumId) => {
-		const endpoint = `https://deezerdevs-deezer.p.rapidapi.com/album/${albumId}`;
-		const options = {
-			method: "GET",
-			headers: {
-				"X-RapidAPI-Key": token,
-				"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-			},
-		};
-		const response = await fetch(endpoint, options);
-		if (response.ok) {
-			const data = await response.json();
-			console.log(data);
-			dispatch(storeAlbum(data));
-		}
-	};
+	const [flag, setFlag] = useState(false);
+	// const fetchAlbumSection = async (albumId) => {
+	// 	const endpoint = `https://deezerdevs-deezer.p.rapidapi.com/album/${albumId}`;
+	// 	const options = {
+	// 		method: "GET",
+	// 		headers: {
+	// 			"X-RapidAPI-Key": token,
+	// 			"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+	// 		},
+	// 	};
+	// 	const response = await fetch(endpoint, options);
+	// 	if (response.ok) {
+	// 		const data = await response.json();
+	// 		console.log(data);
+	// 		dispatch(storeAlbum(data));
+	// 	}
+	// };
+	// const formatTrackDuration = (durationInSeconds) => {
+	// 	const minutes = Math.floor(durationInSeconds / 60);
+	// 	const seconds = durationInSeconds % 60;
+	// 	return ` ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+	// };
+	// const [flag, setFlag] = useState(false);
 	const formatTrackDuration = (durationInSeconds) => {
 		const minutes = Math.floor(durationInSeconds / 60);
 		const seconds = durationInSeconds % 60;
 		return ` ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 	};
-	const [flag, setFlag] = useState(false);
-
 	useEffect(() => {
 		setFlag(!flag);
 	}, []);
 
 	useEffect(() => {
-		fetchAlbumSection(albumId);
+		// fetchAlbumSection(albumId);
 	}, []);
 
 	useEffect(() => {
-		console.log("Album:", album);
+		// console.log("Album:", album);
 	}, []);
 	return (
 		<>
-			{album ? (
+			{likedSong ? (
 				<Container fluid className="p-0 bg-black">
 					<Row className="g-4 m-4">
 						<Col md={4} lg={3} className="text-center">
@@ -145,7 +150,7 @@ const LikedSongs = () => {
 
 					<hr />
 
-					{album.tracks.data.map((track, index) => {
+					{likedSong.map((track, index) => {
 						return (
 							<>
 								<Row className="mt-4 track-row">

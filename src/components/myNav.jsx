@@ -1,5 +1,6 @@
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import ButtonLink from "./ButtonLink";
+import { Link } from "react-router-dom";
 
 const MyNav = ({ children }) => {
 	return (

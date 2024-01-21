@@ -77,10 +77,10 @@ const Home = () => {
 					</Container>
 
 					<Container fluid className="d-none d-sm-block">
+						<h4 className=" fw-bold my-4 d-inline-block">
+							Buonasera
+						</h4>
 						<Row>
-							<h4 className=" fw-bold my-4 d-inline-block">
-								Buonasera
-							</h4>
 							{home.map((track, index) => {
 								return (
 									<>
@@ -137,6 +137,7 @@ const Home = () => {
 									<>
 										{index < 6 && (
 											<Col
+												key={`sezione-buonasera-small-${track.album.id}`}
 												xs={6}
 												className="justify-content-center d-flex g-2">
 												<Link
@@ -180,6 +181,7 @@ const Home = () => {
 										<>
 											{index < 6 && (
 												<Link
+													key={`sezione-altro-${track.album.id}`}
 													to={`/albumId/${
 														home[index + 10].album
 															.id
@@ -229,7 +231,9 @@ const Home = () => {
 								return (
 									<>
 										{index < 6 && (
-											<div className=" ">
+											<div
+												key={`sezione-altro-che-piace-${track.album.id}`}
+												className=" ">
 												<Link
 													to={`/albumId/${track.album.id}`}>
 													<img

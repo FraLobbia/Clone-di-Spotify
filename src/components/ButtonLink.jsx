@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+// { to, children, variant = "link", className, style }
 const ButtonLink = ({ to, children, variant = "link", className, style }) => {
 	return (
 		<Link to={to}>
