@@ -1,17 +1,15 @@
-import "./assets/dist/css/style.min.css";
-import Home from "./components/Home";
-import MyNavMini from "./components/MyNavMini";
-import Player from "./components/Player";
-import PlayerMini from "./components/PlayerMini";
-import MyNav from "./components/myNav";
-import { useSelector } from "react-redux";
+import "./style.scss";
+import MyNavMini from "./_components/MyNavMini";
+import Player from "./_components/Player";
+import PlayerMini from "./_components/PlayerMini";
+import MyNav from "./_components/myNav";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Album from "./components/Album";
-import NotFound from "./components/NotFound";
-import LikedSongs from "./components/LikedSongs";
-import ArtistPage from "./components/ArtistPage";
-import AudioSource from "./components/AudioSource";
+import NotFound from "./_pages/NotFound";
+import AudioSource from "./_components/AudioSource";
 import { Container } from "react-bootstrap";
+import Home from "./_pages/Home";
+import Album from "./_pages/Album";
+import ArtistPage from "./_pages/ArtistPage";
 
 function App() {
 	return (
@@ -25,7 +23,7 @@ function App() {
 							path="/artist/:artistId"
 							element={<ArtistPage />}
 						/>
-						<Route path="/liked-songs" element={<LikedSongs />} />
+						<Route path="/liked-songs" element={<likedSongs />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</MyNav>

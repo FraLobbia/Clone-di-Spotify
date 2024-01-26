@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import ButtonLink from "./ButtonLink";
+import ButtonLink from "../_utility/ButtonLink";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 

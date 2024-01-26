@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 
 const AudioSource = () => {
-	const { trackPlaying } = useSelector((store) => store.trackPlaying);
+	const { playingTrack } = useSelector((store) => store.playingTrack);
 	return (
 		<audio id="myAudio">
-			{trackPlaying && (
+			{playingTrack && (
 				<source
 					id="audioSource"
-					src={trackPlaying.preview}
+					src={playingTrack.preview}
 					type="audio/mp3"
 				/>
 			)}

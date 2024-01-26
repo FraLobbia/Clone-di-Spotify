@@ -1,10 +1,9 @@
-import { Button, Container } from "react-bootstrap";
-import ButtonLink from "./ButtonLink";
-import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import ButtonLink from "../_utility/ButtonLink";
 
 const MyNav = ({ children }) => {
 	return (
-		<Container fluid className="d-flex vh-100">
+		<Container fluid className="d-flex vh-100 ">
 			<nav
 				className="d-none d-md-block bg-black border-end border-tertiary "
 				style={{ minWidth: "280px" }}>

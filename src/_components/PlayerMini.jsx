@@ -1,21 +1,21 @@
 import { Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import ButtonLink from "./ButtonLink";
+import ButtonLink from "../_utility/ButtonLink";
 
 const PlayerMini = () => {
-	const { trackPlaying } = useSelector((store) => store.trackPlaying);
+	const playingTrack = useSelector((store) => store.playingTrack.track);
 	return (
 		<Row
 			id="playerMini"
 			className="d-md-none bg-dark-gray py-3 mx-1 rounded-3 flex-nowrap">
 			<div className="d-flex align-items-center flex-grow-1 flex-shrink-1 text-truncate">
-				{trackPlaying && (
+				{playingTrack && (
 					<>
 						<ButtonLink
-							to={`/albumId/${trackPlaying.album.id}`}
+							to={`/albumId/${playingTrack.album.id}`}
 							className="p-0">
 							<img
-								src={trackPlaying.album.cover_medium}
+								src={playingTrack.album.cover_medium}
 								alt="cover album"
 								style={{ height: "60px" }}
 								className="ms-2"
@@ -24,12 +24,12 @@ const PlayerMini = () => {
 
 						<div className="fs-6 px-3 d-flex flex-column justify-content-center">
 							<ButtonLink className="p-0 text-white">
-								{trackPlaying.title_short}
+								{playingTrack.title_short}
 							</ButtonLink>
 							<ButtonLink
-								to={`/artist/${trackPlaying.artist.id}`}
+								to={`/artist/${playingTrack.artist.id}`}
 								className="p-0">
-								{trackPlaying.artist.name}
+								{playingTrack.artist.name}
 							</ButtonLink>
 						</div>
 					</>

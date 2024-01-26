@@ -1,6 +1,8 @@
+import { STORE_ALBUM } from "../actions";
+
 const albumReducer = (state = { album: null }, action) => {
 	switch (action.type) {
-		case "STORE_ALBUM":
+		case STORE_ALBUM:
 			return { ...state, album: action.payload };
 		default:
 			return state;

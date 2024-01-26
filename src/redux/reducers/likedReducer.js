@@ -1,13 +1,24 @@
+import { SET_LIKED_SONG } from "../actions";
+
 const initialState = {
 	likedSongs: [], // Un array per memorizzare le canzoni "liked"
 };
 
 const likedReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "SET_LIKED_SONG":
+		case SET_LIKED_SONG:
 			return {
 				...state,
 				likedSongs: [...state.likedSongs, action.payload],
+			};
+		case "REMOVE_LIKED_SONG":
+			// Filtra le tracce rimuovendo quella con l'ID corrispondente
+			const updatedLikedSongs = state.likedSongs.filter(
+				(track) => track.id !== action.payload
+			);
+			return {
+				...state,
+				likedSongs: updatedLikedSongs,
 			};
 		default:
 			return state;

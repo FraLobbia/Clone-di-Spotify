@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsPlaying } from "../redux/actions";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { playMusic } from "../redux/actions";
 
 const Player = () => {
 	const audio = document.getElementById("myAudio");
 	const dispatch = useDispatch();
-	const isPlaying = useSelector((store) => store.player.isPlaying);
-	const trackPlaying = useSelector(
-		(store) => store.trackPlaying.trackPlaying
-	);
-	const togglePlayPause = () => {
+	const playingTrack = useSelector((store) => store.playingTrack);
+	const { isPlaying } = useSelector((store) => store.playingTrack);
+
+	const handlePlayingMusic = () => {
 		if (audio.paused) {
 			audio.play();
 			// switchIconaPlayPause("pause");
@@ -20,27 +19,19 @@ const Player = () => {
 		}
 	};
 
-	const [flag, setFlag] = useState(false);
-
 	useEffect(() => {
-		setFlag(!flag);
-	}, []);
-
-	useEffect(() => {
-		console.log("in riproduzione", trackPlaying);
-		// console.log("ciao");
-	}, [flag]);
-
+		handlePlayingMusic();
+	}, [isPlaying]);
 	return (
 		<Container
 			fluid
 			className="d-none d-md-block bg-black border-top border-tertiary"
 			id="player">
-			{trackPlaying && (
+			{!playingTrack && (
 				<Row className="py-3 fs-5 align-items-center">
 					<Col className="d-flex align-items-center justify-content-start ms-3">
 						<img
-							src={trackPlaying.album.cover_medium}
+							src={playingTrack.album.cover_medium}
 							alt="cover dell'album"
 							style={{ maxWidth: "70px" }}
 						/>
@@ -48,10 +39,10 @@ const Player = () => {
 							<Button
 								variant="link"
 								className="py-0 text-white text-start">
-								{trackPlaying.title}
+								{playingTrack.title}
 							</Button>
 							<Button variant="link" className="py-0 text-start">
-								{trackPlaying.artist.name}
+								{playingTrack.artist.name}
 							</Button>
 						</div>
 						<Button variant="link">
@@ -73,7 +64,7 @@ const Player = () => {
 									id="playButton"
 									variant="link"
 									// onClick={() => dispatch(setIsPlaying(!isPlaying))}
-									onClick={() => togglePlayPause()}
+									onClick={() => dispatch(playMusic())}
 									className=" p-0 playButtonclass">
 									<i className="bi bi-play-circle-fill fs-1 text-white"></i>
 								</Button>

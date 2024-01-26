@@ -1,33 +1,17 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import ButtonLink from "./ButtonLink";
+import ButtonLink from "../_utility/ButtonLink";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { token } from "../token";
-import { setLikedSong, storeAlbum } from "../redux/actions";
+import { getAlbum, setLikedSong } from "../redux/actions";
 
 const Album = () => {
-	const { album } = useSelector((store) => store.album);
+	const isLoading = useSelector((store) => store.loading.loading);
+	const { album } = useSelector((store) => store.albumData);
 	const { likedSongs } = useSelector((store) => store.likedSongs);
 	const { albumId } = useParams();
 	const dispatch = useDispatch();
 
-	const fetchAlbumSection = async (albumId) => {
-		const endpoint = `https://deezerdevs-deezer.p.rapidapi.com/album/${albumId}`;
-		const options = {
-			method: "GET",
-			headers: {
-				"X-RapidAPI-Key": token,
-				"X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-			},
-		};
-		const response = await fetch(endpoint, options);
-		if (response.ok) {
-			const data = await response.json();
-			console.log(data);
-			dispatch(storeAlbum(data));
-		}
-	};
 	const formatTrackDuration = (durationInSeconds) => {
 		const minutes = Math.floor(durationInSeconds / 60);
 		const seconds = durationInSeconds % 60;
@@ -38,23 +22,13 @@ const Album = () => {
 		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
 	};
 
-	const [flag, setFlag] = useState(false);
-
 	useEffect(() => {
-		setFlag(!flag);
+		dispatch(getAlbum(albumId));
 	}, []);
 
-	useEffect(() => {
-		fetchAlbumSection(albumId);
-	}, []);
-
-	useEffect(() => {
-		console.log("Album:", album);
-		console.log("LIKED:", likedSongs);
-	}, []);
 	return (
 		<>
-			{album ? (
+			{!isLoading && album ? (
 				<Container fluid className="p-0 bg-black">
 					<Row className="g-4 m-4">
 						<Col md={4} lg={3} className="text-center">
@@ -194,7 +168,15 @@ const Album = () => {
 										className="p-0"
 										onClick={() =>
 											dispatch(setLikedSong(track))
-										}>
+										}
+										// onClick={() =>
+										// 	isLiked(likedSongs, track.id)
+										// 		? dispatch(setLikedSong(track))
+										// 		: dispatch(
+										// 				removeLikedSong(track)
+										// 		  )
+										// }
+									>
 										<i
 											className={`bi bi-heart fs-5 ${
 												isLiked(likedSongs, track.id)
