@@ -9,7 +9,7 @@ import {
 	setVolume,
 } from "../redux/actions";
 import ButtonLink from "../_utility/ButtonLink";
-const Player = (props) => {
+const Player = () => {
 	const dispatch = useDispatch();
 	const { track, volume, isPlaying } = useSelector(
 		(store) => store.playingTrack
@@ -101,7 +101,6 @@ const Player = (props) => {
 									className="w-100"
 									min="0"
 									max="100"
-									value="0"
 								/>
 							</Col>
 							<Col xs={2}>
@@ -132,7 +131,6 @@ const Player = (props) => {
 							<input
 								type="range"
 								min="0"
-								defaultValue="50"
 								onChange={(e) =>
 									dispatch(setVolume(e.target.value))
 								}

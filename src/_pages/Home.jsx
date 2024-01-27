@@ -142,7 +142,7 @@ const Home = () => {
 							{artist.slice(0, 6).map((track, index) => {
 								return (
 									<Col
-										key={`sezione-buonasera-small-${track.album.id}`}
+										key={`sezione-buonasera-small-${index}`}
 										xs={6}
 										className="justify-content-center d-flex g-2">
 										<Link to={`/albumId/${track.album.id}`}>
@@ -181,7 +181,7 @@ const Home = () => {
 								{artist.slice(0, 6).map((track, index) => {
 									return (
 										<Link
-											key={`sezione-altro-${track.album.id}`}
+											key={`sezione-altro-${index}`}
 											to={`/albumId/${
 												artist[index + 10].album.id
 											}`}>
@@ -232,7 +232,7 @@ const Home = () => {
 							{artist.slice(0, 6).map((track, index) => {
 								return (
 									<div
-										key={`sezione-altro-che-piace-${track.album.id}`}>
+										key={`sezione-altro-che-piace-${index}`}>
 										<Link to={`/albumId/${track.album.id}`}>
 											<img
 												src={track.album.cover_big}
