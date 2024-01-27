@@ -1,16 +1,15 @@
 import { Button, Col, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ButtonLink from "../_utility/ButtonLink";
+import { isLiked, pauseMusic, playMusic } from "../redux/actions";
 
-const PlayerMini = (props) => {
+const PlayerMini = () => {
+	const dispatch = useDispatch();
 	const { track, volume, isPlaying } = useSelector(
 		(store) => store.playingTrack
 	);
 	const { likedSongs } = useSelector((store) => store.likedSongs);
 
-	const isLiked = (arrayToCheck, idToCheck) => {
-		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
-	};
 	return (
 		<Row
 			id="playerMini"
@@ -56,7 +55,13 @@ const PlayerMini = (props) => {
 				<Button variant="link" className="dots">
 					<i className="bi bi-three-dots-vertical fs-3"></i>
 				</Button>
-				<Button variant="link" onClick={() => props.func()}>
+				<Button
+					variant="link"
+					onClick={() =>
+						isPlaying
+							? dispatch(pauseMusic())
+							: dispatch(playMusic())
+					}>
 					<i
 						className={`bi ${
 							isPlaying

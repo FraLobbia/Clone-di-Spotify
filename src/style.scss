@@ -97,21 +97,26 @@ button:hover {
 	transition: background-color 0.1s;
 	cursor: pointer;
 
-	&:hover {
+	&:hover,
+	&:where(.currentlyPlaying) {
 		background-color: rgba(255, 255, 255, 0.1);
 
 		.play-button {
-			display: block !important;
+			display: flex !important;
 		}
 		.track-index {
 			display: none;
 		}
 	}
+	&:where(.currentlyPlaying) {
+		border-block: 1px solid gray;
+	}
 
 	.track-index {
 		display: flex;
 		align-items: center;
-		&:hover {
+		&:hover,
+		&:where(.currentlyPlaying) {
 			display: none;
 		}
 		.index-number {
@@ -120,6 +125,9 @@ button:hover {
 
 		.play-button {
 			display: none;
+			&:where(.currentlyPlaying) {
+				display: flex;
+			}
 		}
 	}
 }

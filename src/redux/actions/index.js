@@ -4,6 +4,7 @@ export const STORE_ARTIST = "STORE_ARTIST";
 export const STORE_ALBUM = "STORE_ALBUM";
 export const SET_PLAYING_TRACK = "SET_PLAYING_TRACK";
 export const SET_LIKED_SONG = "SET_LIKED_SONG";
+export const REMOVE_LIKED_SONG = "REMOVE_LIKED_SONG";
 export const PLAY_MUSIC = "PLAY_MUSIC";
 export const PAUSE_MUSIC = "PAUSE_MUSIC";
 export const SET_VOLUME = "SET_VOLUME";
@@ -46,7 +47,7 @@ export const setLikedSong = (track) => {
 };
 export const removeLikedSong = (trackId) => {
 	return {
-		type: "REMOVE_LIKED_SONG",
+		type: REMOVE_LIKED_SONG,
 		payload: trackId,
 	};
 };
@@ -98,4 +99,8 @@ export const getArtist = (artistName) => {
 			console.log("error", err);
 		}
 	};
+};
+
+export const isLiked = (arrayToCheck, idToCheck) => {
+	return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
 };

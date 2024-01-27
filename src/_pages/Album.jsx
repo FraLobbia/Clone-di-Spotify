@@ -3,11 +3,23 @@ import ButtonLink from "../_utility/ButtonLink";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getAlbum, setLikedSong } from "../redux/actions";
+import {
+	getAlbum,
+	isLiked,
+	pauseMusic,
+	playMusic,
+	removeLikedSong,
+	setLikedSong,
+	setPlayingTrack,
+} from "../redux/actions";
+import { Link } from "react-router-dom";
 
 const Album = () => {
 	const isLoading = useSelector((store) => store.loading.loading);
-	const { isPlaying } = useSelector((store) => store.playingTrack);
+	const { volume, isPlaying } = useSelector((store) => store.playingTrack);
+	const currentlyPlayingTrack = useSelector(
+		(store) => store.playingTrack.track
+	);
 	const { album } = useSelector((store) => store.albumData);
 	const { likedSongs } = useSelector((store) => store.likedSongs);
 	const { albumId } = useParams();
@@ -17,10 +29,6 @@ const Album = () => {
 		const minutes = Math.floor(durationInSeconds / 60);
 		const seconds = durationInSeconds % 60;
 		return ` ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-	};
-
-	const isLiked = (arrayToCheck, idToCheck) => {
-		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
 	};
 
 	useEffect(() => {
@@ -38,15 +46,6 @@ const Album = () => {
 								src={album.cover_big}
 								className="img-fluid mb-3"
 								alt="img placeholder"
-								// style={{
-								// 	width: "300px",
-								// 	boxShadow:
-								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
-								// 	WebkitBoxShadow:
-								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
-								// 	MozBoxShadow:
-								// 		" -1px -1px 110px 9px rgba(0, 0, 0, 0.72)",
-								// }}
 							/>
 						</Col>
 						<Col className="d-flex flex-column justify-content-evenly">
@@ -94,12 +93,19 @@ const Album = () => {
 					<div
 						className="d-flex justify-content-start align-items-baseline my-3 mb-3"
 						id="albumGradient">
-						<ButtonLink style={{ borderRadius: "100%" }}>
+						<Button
+							variant="link"
+							style={{ borderRadius: "100%" }}
+							onClick={() =>
+								isPlaying
+									? dispatch(pauseMusic())
+									: dispatch(playMusic())
+							}>
 							<i
 								className={`bi bi-${
 									isPlaying ? "pause" : "play"
 								}-circle-fill display-3 text-success`}></i>
-						</ButtonLink>
+						</Button>
 						<ButtonLink>
 							<i className="bi bi-heart fs-4"></i>
 						</ButtonLink>
@@ -132,13 +138,27 @@ const Album = () => {
 
 					{album.tracks.data.map((track, index) => {
 						return (
-							<Row className="mt-4 track-row" key={track.title}>
+							<Row
+								className={`mt-4 track-row ${
+									track === currentlyPlayingTrack
+										? "currentlyPlaying"
+										: ""
+								}`}
+								key={track.title}
+								onClick={() =>
+									dispatch(setPlayingTrack(track))
+								}>
 								<Col
 									xs={1}
 									className="d-flex justify-content-center align-items-center">
 									<Button
 										variant="link"
-										className="play-button fs-2 d-none text-white p-0">
+										className="play-button fs-2 d-none text-white p-0"
+										onClick={() =>
+											isPlaying
+												? dispatch(pauseMusic())
+												: dispatch(playMusic())
+										}>
 										<i
 											className={`bi ${
 												isPlaying
@@ -146,22 +166,29 @@ const Album = () => {
 													: "bi-play-circle-fill"
 											} fs-2`}></i>
 									</Button>
-									<span className="text-white track-index">
+									<span
+										className={`text-white ${
+											track === currentlyPlayingTrack
+												? "currentlyPlaying"
+												: ""
+										} track-index`}>
 										{index + 1}
 									</span>
 								</Col>
 								<Col
 									xs={7}
 									sm={5}
-									className="ps-0 d-flex flex-column justify-content-center text-truncate">
-									<ButtonLink className="text-white p-0">
+									className="text-truncate d-flex flex-column align-items-start">
+									<Button
+										variant="link"
+										className="text-white p-0">
 										{track.title}
-									</ButtonLink>
-									<ButtonLink
-										to={`/artist/${track.artist.id}`}
-										className="p-0">
-										{track.artist.name}
-									</ButtonLink>
+									</Button>
+									<Button variant="link" className="p-0">
+										<Link to={`/artist/${track.artist.id}`}>
+											{track.artist.name}
+										</Link>
+									</Button>
 								</Col>
 								<Col
 									xs={4}
@@ -176,16 +203,12 @@ const Album = () => {
 										variant="link"
 										className="p-0"
 										onClick={() =>
-											dispatch(setLikedSong(track))
-										}
-										// onClick={() =>
-										// 	isLiked(likedSongs, track.id)
-										// 		? dispatch(setLikedSong(track))
-										// 		: dispatch(
-										// 				removeLikedSong(track)
-										// 		  )
-										// }
-									>
+											!isLiked(likedSongs, track.id)
+												? dispatch(setLikedSong(track))
+												: dispatch(
+														removeLikedSong(track)
+												  )
+										}>
 										<i
 											className={`bi bi-heart fs-5 ${
 												isLiked(likedSongs, track.id)

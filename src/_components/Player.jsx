@@ -1,6 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { playMusic, setLikedSong, setVolume } from "../redux/actions";
+import {
+	isLiked,
+	pauseMusic,
+	playMusic,
+	removeLikedSong,
+	setLikedSong,
+	setVolume,
+} from "../redux/actions";
 import ButtonLink from "../_utility/ButtonLink";
 const Player = (props) => {
 	const dispatch = useDispatch();
@@ -8,10 +15,6 @@ const Player = (props) => {
 		(store) => store.playingTrack
 	);
 	const { likedSongs } = useSelector((store) => store.likedSongs);
-
-	const isLiked = (arrayToCheck, idToCheck) => {
-		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
-	};
 
 	return (
 		<Container
@@ -36,7 +39,11 @@ const Player = (props) => {
 						</div>
 						<Button
 							variant="link"
-							onClick={() => dispatch(setLikedSong(track))}>
+							onClick={() =>
+								!isLiked(likedSongs, track.id)
+									? dispatch(setLikedSong(track))
+									: dispatch(removeLikedSong(track))
+							}>
 							<i
 								className={`bi bi-heart ${
 									isLiked(likedSongs, track.id)
@@ -50,26 +57,29 @@ const Player = (props) => {
 					<Col className="text-center">
 						<Row>
 							<Col className="d-flex justify-content-center gap-3">
-								<ButtonLink>
+								<ButtonLink aClass={"d-flex"}>
 									<i className="bi bi-shuffle"></i>
 								</ButtonLink>
-								<ButtonLink>
+								<ButtonLink aClass={"d-flex"}>
 									<i className="bi bi-skip-start-fill"></i>
 								</ButtonLink>
 								<Button
 									variant="link"
 									id="playButton"
-									onClick={() => props.func()}
-									className="playButtonclass">
+									onClick={() =>
+										isPlaying
+											? dispatch(pauseMusic())
+											: dispatch(playMusic())
+									}>
 									<i
 										className={`bi bi-${
 											isPlaying ? "pause" : "play"
 										}-circle-fill fs-1 text-white`}></i>
 								</Button>
-								<ButtonLink>
+								<ButtonLink aClass={"d-flex"}>
 									<i className="bi bi-skip-end-fill "></i>
 								</ButtonLink>
-								<ButtonLink>
+								<ButtonLink aClass={"d-flex"}>
 									<i className="bi bi-repeat"></i>
 								</ButtonLink>
 							</Col>

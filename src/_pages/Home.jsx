@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getArtist } from "../redux/actions";
+import { getArtist, pauseMusic, playMusic } from "../redux/actions";
 const Home = () => {
 	const artist = useSelector((store) => store.artistData.artist);
 	const isLoading = useSelector((store) => store.loading.loading);
@@ -51,10 +51,14 @@ const Home = () => {
 							</p>
 							<Button
 								variant="success"
-								id="playButtonHeroSection"
 								style={{
 									width: "200px",
 								}}
+								onClick={() =>
+									isPlaying
+										? dispatch(pauseMusic())
+										: dispatch(playMusic())
+								}
 								className="text-black rounded-5 px-2 py-0 d-flex align-items-center justify-content-evenly">
 								<i
 									className={`bi ${

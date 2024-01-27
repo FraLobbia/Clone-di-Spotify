@@ -1,15 +1,15 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import ButtonLink from "./ButtonLink";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router";
-import { token } from "../token";
-import { storeAlbum } from "../redux/actions";
+import ButtonLink from "../_utility/ButtonLink";
 
 const LikedSongs = () => {
 	const { likedSongs } = useSelector((store) => store.likedSongs);
-	const { isPlaying } = useSelector((store) => store.playingTrack);
-	const album = useSelector((store) => store.album.album);
+	const { track, volume, isPlaying } = useSelector(
+		(store) => store.playingTrack
+	);
+	const { album } = useSelector((store) => store.albumData);
 	const { albumId } = useParams();
 	const dispatch = useDispatch();
 
@@ -17,10 +17,6 @@ const LikedSongs = () => {
 		const minutes = Math.floor(durationInSeconds / 60);
 		const seconds = durationInSeconds % 60;
 		return ` ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-	};
-
-	const isLiked = (arrayToCheck, idToCheck) => {
-		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
 	};
 
 	useEffect(() => {
