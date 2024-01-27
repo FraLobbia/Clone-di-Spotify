@@ -16,6 +16,9 @@ button:hover {
 	i {
 		font-size: 1.5rem;
 	}
+	button {
+		padding: 0;
+	}
 }
 
 #friendActivityButton {
@@ -83,7 +86,7 @@ button:hover {
 #play-button {
 	transition: transform ease-in-out;
 	&:hover {
-		transform: scale(1.1);
+		transform: scale(1.3);
 	}
 }
 

@@ -2,10 +2,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import ButtonLink from "../_utility/ButtonLink";
 import { useParams } from "react-router";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const ArtistPage = () => {
 	const { artistId } = useParams();
-
+	const { isPlaying } = useSelector((store) => store.playingTrack);
 	useEffect(() => {
 		console.log(artistId);
 	}, []);
@@ -69,7 +70,12 @@ const ArtistPage = () => {
 									type="button"
 									className="btn p-0 d-none d-md-block"
 									id="play-button">
-									<i className="bi bi-play-circle-fill display-4 text-success"></i>
+									<i
+										className={`bi ${
+											isPlaying
+												? "bi-pause-circle-fill"
+												: "bi-play-circle-fill"
+										}  display-4 text-success`}></i>
 								</button>
 								<ButtonLink
 									href=""
@@ -90,7 +96,12 @@ const ArtistPage = () => {
 									className="btn p-0 d-block d-md-none"
 									id="play-button"
 									style={{ marginRight: "-8%" }}>
-									<i className="bi bi-play-circle-fill display-3 text-success ms-3"></i>
+									<i
+										className={`bi ${
+											isPlaying
+												? "bi-pause-circle-fill"
+												: "bi-play-circle-fill"
+										} ms-3 display-3 text-success`}></i>
 								</button>
 							</div>
 

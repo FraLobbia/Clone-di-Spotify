@@ -1,8 +1,16 @@
-import { PAUSE_MUSIC, PLAY_MUSIC, SET_PLAYING_TRACK } from "../actions";
+import {
+	PAUSE_MUSIC,
+	PLAY_MUSIC,
+	SET_CURRENT_TIME_TRACK,
+	SET_PLAYING_TRACK,
+	SET_VOLUME,
+} from "../actions";
 
 const initialState = {
 	isPlaying: false,
 	track: "",
+	volume: 50,
+	currentTime: 0,
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -21,6 +29,16 @@ const playerReducer = (state = initialState, action) => {
 			return {
 				...state,
 				track: action.payload,
+			};
+		case SET_VOLUME:
+			return {
+				...state,
+				volume: action.payload,
+			};
+		case SET_CURRENT_TIME_TRACK:
+			return {
+				...state,
+				currentTime: action.payload,
 			};
 		default:
 			return state;

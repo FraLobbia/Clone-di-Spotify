@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // { to, children, variant = "link", className, style }
 const ButtonLink = ({ to, children, variant = "link", className, style }) => {
 	return (
-		<Link to={to}>
+		<Link className="d-flex" to={to}>
 			<Button variant={variant} className={className} style={style}>
 				{children}
 			</Button>

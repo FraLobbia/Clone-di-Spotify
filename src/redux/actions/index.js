@@ -6,6 +6,8 @@ export const SET_PLAYING_TRACK = "SET_PLAYING_TRACK";
 export const SET_LIKED_SONG = "SET_LIKED_SONG";
 export const PLAY_MUSIC = "PLAY_MUSIC";
 export const PAUSE_MUSIC = "PAUSE_MUSIC";
+export const SET_VOLUME = "SET_VOLUME";
+export const SET_CURRENT_TIME_TRACK = "SET_CURRENT_TIME_TRACK";
 
 export const storeArtist = (artist) => ({
 	type: STORE_ARTIST,
@@ -24,6 +26,16 @@ export const playMusic = () => ({
 });
 export const pauseMusic = () => ({
 	type: PAUSE_MUSIC,
+});
+
+export const setVolume = (volumeValue) => ({
+	type: SET_VOLUME,
+	payload: volumeValue,
+});
+
+export const setCurrentTime = (currentTime) => ({
+	type: SET_CURRENT_TIME_TRACK,
+	payload: currentTime,
 });
 
 export const setLikedSong = (track) => {

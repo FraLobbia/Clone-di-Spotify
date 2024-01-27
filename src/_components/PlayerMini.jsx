@@ -2,20 +2,27 @@ import { Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ButtonLink from "../_utility/ButtonLink";
 
-const PlayerMini = () => {
-	const playingTrack = useSelector((store) => store.playingTrack.track);
+const PlayerMini = (props) => {
+	const { track, volume, isPlaying } = useSelector(
+		(store) => store.playingTrack
+	);
+	const { likedSongs } = useSelector((store) => store.likedSongs);
+
+	const isLiked = (arrayToCheck, idToCheck) => {
+		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
+	};
 	return (
 		<Row
 			id="playerMini"
 			className="d-md-none bg-dark-gray py-3 mx-1 rounded-3 flex-nowrap">
 			<div className="d-flex align-items-center flex-grow-1 flex-shrink-1 text-truncate">
-				{playingTrack && (
+				{track && (
 					<>
 						<ButtonLink
-							to={`/albumId/${playingTrack.album.id}`}
+							to={`/albumId/${track.album.id}`}
 							className="p-0">
 							<img
-								src={playingTrack.album.cover_medium}
+								src={track.album.cover_medium}
 								alt="cover album"
 								style={{ height: "60px" }}
 								className="ms-2"
@@ -24,12 +31,12 @@ const PlayerMini = () => {
 
 						<div className="fs-6 px-3 d-flex flex-column justify-content-center">
 							<ButtonLink className="p-0 text-white">
-								{playingTrack.title_short}
+								{track.title_short}
 							</ButtonLink>
 							<ButtonLink
-								to={`/artist/${playingTrack.artist.id}`}
+								to={`/artist/${track.artist.id}`}
 								className="p-0">
-								{playingTrack.artist.name}
+								{track.artist.name}
 							</ButtonLink>
 						</div>
 					</>
@@ -41,13 +48,21 @@ const PlayerMini = () => {
 					<i className="bi bi-speaker fs-3"></i>
 				</Button>
 				<Button variant="link" className="heart">
-					<i className="bi bi-heart fs-3"></i>
+					<i
+						className={`bi bi-heart fs-3 ${
+							isLiked(likedSongs, track.id) ? "text-success" : ""
+						}`}></i>
 				</Button>
 				<Button variant="link" className="dots">
 					<i className="bi bi-three-dots-vertical fs-3"></i>
 				</Button>
-				<Button variant="link">
-					<i className="bi bi-play-circle-fill me-3 display-1 text-white"></i>
+				<Button variant="link" onClick={() => props.func()}>
+					<i
+						className={`bi ${
+							isPlaying
+								? "bi-pause-circle-fill"
+								: "bi-play-circle-fill"
+						} me-3 display-1 text-white`}></i>
 				</Button>
 			</Col>
 		</Row>

@@ -6,11 +6,12 @@ import { getArtist } from "../redux/actions";
 const Home = () => {
 	const artist = useSelector((store) => store.artistData.artist);
 	const isLoading = useSelector((store) => store.loading.loading);
+	const { isPlaying } = useSelector((store) => store.playingTrack);
 	const generi = ["Latino", "Mint", "Gaming", "Out Now", "Afro", "Party"];
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getArtist("queen"));
+		dispatch(getArtist("eminem"));
 	}, []);
 
 	return (
@@ -55,7 +56,13 @@ const Home = () => {
 									width: "200px",
 								}}
 								className="text-black rounded-5 px-2 py-0 d-flex align-items-center justify-content-evenly">
-								<i className="bi bi-play-circle-fill fs-1 me-2"></i>
+								<i
+									className={`bi ${
+										isPlaying
+											? "bi-pause-circle-fill"
+											: "bi-play-circle-fill"
+									} fs-1 me-2`}></i>
+
 								<span className="me-2 fw-bold ">Riproduci</span>
 							</Button>
 							<div>
@@ -201,7 +208,12 @@ const Home = () => {
 									className="rounded-2 w-75"
 								/>
 								<div className="d-flex align-items-center justify-content-start gap-3 mt-3">
-									<i className="bi bi-play-circle-fill display-1 "></i>
+									<i
+										className={`bi ${
+											isPlaying
+												? "bi-pause-circle-fill"
+												: "bi-play-circle-fill"
+										}display-1`}></i>
 									<i className="bi bi-heart"></i>
 									<i className="bi bi-three-dots-vertical "></i>
 								</div>

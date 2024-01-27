@@ -1,7 +1,5 @@
 import "./style.scss";
 import MyNavMini from "./_components/MyNavMini";
-import Player from "./_components/Player";
-import PlayerMini from "./_components/PlayerMini";
 import MyNav from "./_components/myNav";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./_pages/NotFound";
@@ -29,12 +27,10 @@ function App() {
 				</MyNav>
 
 				<Container fluid className="fixed-bottom p-0">
-					<Player />
-					<PlayerMini />
+					<AudioSource />
 					<MyNavMini />
 				</Container>
 			</BrowserRouter>
-			<AudioSource />
 		</>
 	);
 }

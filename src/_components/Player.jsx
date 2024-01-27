@@ -1,135 +1,138 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { playMusic } from "../redux/actions";
-
-const Player = () => {
-	const audio = document.getElementById("myAudio");
+import { playMusic, setLikedSong, setVolume } from "../redux/actions";
+import ButtonLink from "../_utility/ButtonLink";
+const Player = (props) => {
 	const dispatch = useDispatch();
-	const playingTrack = useSelector((store) => store.playingTrack);
-	const { isPlaying } = useSelector((store) => store.playingTrack);
+	const { track, volume, isPlaying } = useSelector(
+		(store) => store.playingTrack
+	);
+	const { likedSongs } = useSelector((store) => store.likedSongs);
 
-	const handlePlayingMusic = () => {
-		if (audio.paused) {
-			audio.play();
-			// switchIconaPlayPause("pause");
-		} else {
-			audio.pause();
-			// switchIconaPlayPause("play");
-		}
+	const isLiked = (arrayToCheck, idToCheck) => {
+		return arrayToCheck.some((likedTrack) => likedTrack.id === idToCheck);
 	};
 
-	useEffect(() => {
-		handlePlayingMusic();
-	}, [isPlaying]);
 	return (
 		<Container
 			fluid
 			className="d-none d-md-block bg-black border-top border-tertiary"
 			id="player">
-			{!playingTrack && (
-				<Row className="py-3 fs-5 align-items-center">
-					<Col className="d-flex align-items-center justify-content-start ms-3">
+			{track && (
+				<Row xs={3} className="py-3 fs-5 align-items-center">
+					<Col className="d-flex align-items-center justify-content-start gap-3 ps-2">
 						<img
-							src={playingTrack.album.cover_medium}
+							src={track.album.cover_medium}
 							alt="cover dell'album"
 							style={{ maxWidth: "70px" }}
 						/>
 						<div className="d-flex flex-column">
-							<Button
-								variant="link"
-								className="py-0 text-white text-start">
-								{playingTrack.title}
-							</Button>
-							<Button variant="link" className="py-0 text-start">
-								{playingTrack.artist.name}
-							</Button>
+							<ButtonLink className="text-white text-start">
+								{track.title}
+							</ButtonLink>
+							<ButtonLink className="text-start">
+								{track.artist.name}
+							</ButtonLink>
 						</div>
-						<Button variant="link">
-							<i className="bi bi-heart"></i>
+						<Button
+							variant="link"
+							onClick={() => dispatch(setLikedSong(track))}>
+							<i
+								className={`bi bi-heart ${
+									isLiked(likedSongs, track.id)
+										? "text-success"
+										: ""
+								}`}></i>
 						</Button>
 					</Col>
 
 					{/* <!-- navbar player - gruppo CENTER --> */}
 					<Col className="text-center">
 						<Row>
-							<Col>
-								<Button variant="link" className="p-0">
+							<Col className="d-flex justify-content-center gap-3">
+								<ButtonLink>
 									<i className="bi bi-shuffle"></i>
-								</Button>
-								<Button variant="link" className="p-0">
+								</ButtonLink>
+								<ButtonLink>
 									<i className="bi bi-skip-start-fill"></i>
-								</Button>
+								</ButtonLink>
 								<Button
-									id="playButton"
 									variant="link"
-									// onClick={() => dispatch(setIsPlaying(!isPlaying))}
-									onClick={() => dispatch(playMusic())}
-									className=" p-0 playButtonclass">
-									<i className="bi bi-play-circle-fill fs-1 text-white"></i>
+									id="playButton"
+									onClick={() => props.func()}
+									className="playButtonclass">
+									<i
+										className={`bi bi-${
+											isPlaying ? "pause" : "play"
+										}-circle-fill fs-1 text-white`}></i>
 								</Button>
-								<Button variant="link" className="p-0">
+								<ButtonLink>
 									<i className="bi bi-skip-end-fill "></i>
-								</Button>
-								<Button variant="link" className="p-0">
+								</ButtonLink>
+								<ButtonLink>
 									<i className="bi bi-repeat"></i>
-								</Button>
+								</ButtonLink>
 							</Col>
 						</Row>
-						<Container fluid>
-							<Row className="flex-nowrap g-0">
-								<Col xs={2}>
-									<span
-										id="timeProgress"
-										className="text-secondary fs-8">
-										00:02
-									</span>
-								</Col>
 
-								<Col>
-									<input
-										id="progressBar"
-										type="range"
-										className="w-100"
-										min="0"
-										max="100"
-										value="0"
-									/>
-								</Col>
-								<Col xs={2}>
-									<span
-										id="trackDuration"
-										className="text-secondary fs-8">
-										00:30
-									</span>
-								</Col>
-							</Row>
-						</Container>
+						<Row className="flex-nowrap g-0">
+							<Col xs={2}>
+								<span
+									id="timeProgress"
+									className="text-secondary fs-8">
+									00:02
+								</span>
+							</Col>
+
+							<Col>
+								<input
+									id="progressBar"
+									type="range"
+									className="w-100"
+									min="0"
+									max="100"
+									value="0"
+								/>
+							</Col>
+							<Col xs={2}>
+								<span
+									id="trackDuration"
+									className="text-secondary fs-8">
+									00:30
+								</span>
+							</Col>
+						</Row>
 					</Col>
 
 					{/* 	<!-- navbar player - gruppo DX --> */}
-					<Col className="text-end px-0 volume-slider-container">
-						<Button variant="link" className=" p-0">
+					<Col className="d-flex justify-content-end align-items-center gap-2 pe-2">
+						<ButtonLink>
 							<i className="bi bi-text-right"></i>
-						</Button>
-						<Button variant="link" className=" p-1">
+						</ButtonLink>
+						<ButtonLink>
 							<i className="bi bi-list"></i>
-						</Button>
-						<Button variant="link" className=" p-1">
+						</ButtonLink>
+						<ButtonLink>
 							<i className="bi bi-speaker"></i>
-						</Button>
-						<Button variant="link" className=" p-1">
+						</ButtonLink>
+						<ButtonLink>
 							<i className="bi bi-volume-up"></i>
-						</Button>
-						<input
-							type="range"
-							className="volume-slider w-25"
-							min="0"
-							max="100"
-						/>
-						<Button variant="link" className="ps-2">
+						</ButtonLink>
+						<div>
+							<input
+								type="range"
+								min="0"
+								defaultValue="50"
+								onChange={(e) =>
+									dispatch(setVolume(e.target.value))
+								}
+								value={volume}
+								max="100"
+							/>
+						</div>
+						<ButtonLink>
 							<i className="bi bi-arrows-angle-expand"></i>
-						</Button>
+						</ButtonLink>
 					</Col>
 				</Row>
 			)}

@@ -7,6 +7,7 @@ import { getAlbum, setLikedSong } from "../redux/actions";
 
 const Album = () => {
 	const isLoading = useSelector((store) => store.loading.loading);
+	const { isPlaying } = useSelector((store) => store.playingTrack);
 	const { album } = useSelector((store) => store.albumData);
 	const { likedSongs } = useSelector((store) => store.likedSongs);
 	const { albumId } = useParams();
@@ -94,7 +95,10 @@ const Album = () => {
 						className="d-flex justify-content-start align-items-baseline my-3 mb-3"
 						id="albumGradient">
 						<ButtonLink style={{ borderRadius: "100%" }}>
-							<i className="bi bi-play-circle-fill display-3 text-success"></i>
+							<i
+								className={`bi bi-${
+									isPlaying ? "pause" : "play"
+								}-circle-fill display-3 text-success`}></i>
 						</ButtonLink>
 						<ButtonLink>
 							<i className="bi bi-heart fs-4"></i>
@@ -134,8 +138,13 @@ const Album = () => {
 									className="d-flex justify-content-center align-items-center">
 									<Button
 										variant="link"
-										className="play-button fs-2 d-none text-white playButtonClass p-0">
-										<i className="bi bi-play-circle-fill fs-2"></i>
+										className="play-button fs-2 d-none text-white p-0">
+										<i
+											className={`bi ${
+												isPlaying
+													? "bi-pause-circle-fill"
+													: "bi-play-circle-fill"
+											} fs-2`}></i>
 									</Button>
 									<span className="text-white track-index">
 										{index + 1}
