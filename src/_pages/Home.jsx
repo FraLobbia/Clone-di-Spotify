@@ -149,7 +149,7 @@ const Home = () => {
 											<img
 												src={
 													artist[index + 15].album
-														.cover
+														.cover_big
 												}
 												alt="Immagine playlist"
 												width="180px"

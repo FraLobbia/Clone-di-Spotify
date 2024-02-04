@@ -1,30 +1,29 @@
-import { Button } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+import ButtonLink from "../_utility/ButtonLink";
 
 const MyNavMini = () => {
 	return (
-		<div className="d-md-none row bg-black py-4 fs-8">
-			<div className="col-4">
-				<Button
-					variant="link"
+		<Row className="d-md-none bg-black">
+			<Col className="justify-content-center d-flex">
+				<ButtonLink
+					to={"/"}
 					className="d-flex flex-column align-items-center">
 					<i className="bi bi-house-door fs-3"> </i>Home
-				</Button>
-			</div>
-			<div className="col-4">
-				<Button
-					variant="link"
-					className="d-flex flex-column align-items-center">
+				</ButtonLink>
+			</Col>
+			<Col className="justify-content-center d-flex">
+				<ButtonLink className="d-flex flex-column align-items-center">
 					<i className="bi bi-search fs-3"></i>Cerca
-				</Button>
-			</div>
-			<div className="col-4">
-				<Button
-					variant="link"
+				</ButtonLink>
+			</Col>
+			<Col className="justify-content-center d-flex">
+				<ButtonLink
+					to={"/liked-songs"}
 					className="d-flex flex-column align-items-center">
 					<i className="bi bi-collection fs-3"></i>La tua libreria
-				</Button>
-			</div>
-		</div>
+				</ButtonLink>
+			</Col>
+		</Row>
 	);
 };
 

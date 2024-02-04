@@ -38,7 +38,7 @@ const Album = () => {
 	return (
 		<>
 			{!isLoading && album ? (
-				<Container fluid className="p-0 bg-black">
+				<Container fluid className="p-3 bg-black">
 					<Row className="g-4 m-4">
 						<Col md={4} lg={3} className="text-center">
 							<img
